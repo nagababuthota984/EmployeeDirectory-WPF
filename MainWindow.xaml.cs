@@ -24,5 +24,6 @@ namespace EmployeeDirectory_WPF
         {
             InitializeComponent();
         }
+
     }
 }

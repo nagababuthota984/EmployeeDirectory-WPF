@@ -8,4 +8,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\andrew-philips.png" />
+    <None Remove="Images\saketa-logo.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\andrew-philips.png" />
+    <Resource Include="Images\saketa-logo.jpg" />
+  </ItemGroup>
+
 </Project>
