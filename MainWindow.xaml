@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa5="http://schemas.fontawesome.com/icons/"
         xmlns:local="clr-namespace:EmployeeDirectory_WPF"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
@@ -11,6 +12,12 @@
         <SolidColorBrush x:Key="PrimaryColour" Color="#01B0FC"></SolidColorBrush>
         <sys:Double x:Key="TopHeaderFontSize">20</sys:Double>
         <sys:Double x:Key="SideNavbarHeadingFontSize">16</sys:Double>
+        <sys:Double x:Key="UserDPWidth">50</sys:Double>
+        <sys:Double x:Key="UserDPHeight">50</sys:Double>
+        <Thickness x:Key="IconMargin">0 3 6 3</Thickness>
+
+
+
 
     </Window.Resources>
     <DockPanel LastChildFill="True">
@@ -37,7 +44,7 @@
             </StackPanel>
             <Separator Margin="10" Grid.Row="1" Grid.ColumnSpan="3"/>
         </Grid>
-        
+
         <StackPanel Margin="20 30 0 0" DockPanel.Dock="Left" Orientation="Vertical">
             <TextBlock Margin="0 0 0 20"  FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Departments"/>
             <TextBlock Margin="0 0 0 20" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Offices"/>
@@ -58,7 +65,7 @@
                 <Label HorizontalAlignment="Left" FontSize="14" FontWeight="DemiBold" Height="30" Content="Search:"></Label>
                 <TextBox   Padding="5" Height="30" Width="150" ></TextBox>
             </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
                 <Label FontSize="14" FontWeight="DemiBold"  Height="30" Content="Filter By:"></Label>
                 <ComboBox  Padding="7" Height="30" Width="120" >
                     <ComboBoxItem IsSelected="True" Content="Name"></ComboBoxItem>
@@ -66,9 +73,35 @@
                     <ComboBoxItem Content="Skype Id"></ComboBoxItem>
                 </ComboBox>
             </StackPanel>
-            
+
             <Button Margin="0 0 15 0" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2" Height="30" Width="125" Content="Add Employee" Foreground="White" BorderBrush="{StaticResource PrimaryColour}" Background="{StaticResource PrimaryColour}" />
+            <Grid Margin="0 0 15 0" Grid.Row="1" Grid.ColumnSpan="3" ShowGridLines="True">
+                <Border BorderBrush="#DEDEDE" BorderThickness="1">
+                <WrapPanel Margin="10">
+                    <StackPanel Background="#DFDEDE" Orientation="Horizontal" Width="210" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <Image Margin="10 0 0 0" Height="{StaticResource UserDPHeight}" Width="{StaticResource UserDPWidth}" Source="/Images/andrew-philips.png"></Image>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 0 0">
+                            <TextBlock FontSize="13" FontWeight="DemiBold">Andrew Philips</TextBlock>
+                            <TextBlock>Sharepoint Practice Head</TextBlock>
+                            <TextBlock >IT Department</TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}"  Icon="Solid_Phone" Width="10" Height="10" HorizontalAlignment="Left" />
+                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Envelope" Width="10" Height="10" />
+                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Comment" Width="10" Height="10" HorizontalAlignment="Left" />
+                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Star" Width="10" Height="10" HorizontalAlignment="Left" />
+                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Heart" Width="10" Height="10" HorizontalAlignment="Left" />
+
+                            </StackPanel>
+
+                        </StackPanel>
+                    </StackPanel>
+                </WrapPanel>
+                </Border>
+            </Grid>
+
+
         </Grid>
+
 
     </DockPanel>
 </Window>
