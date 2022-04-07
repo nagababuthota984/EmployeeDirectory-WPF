@@ -24,7 +24,10 @@ namespace EmployeeDirectory_WPF
         public MainWindow()
         {
             InitializeComponent();
-            EmployeeCards.ItemsSource = EmployeeData.employees;
+            EmployeeCards.ItemsSource = EmployeeData.Employees;
+            DepartmentsDiv.ItemsSource = EmployeeData.Departments;
+            OfficesDiv.ItemsSource = EmployeeData.Offices;
+            JobTitlesDiv.ItemsSource = EmployeeData.JobTitles;
         }
 
     }

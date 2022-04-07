@@ -47,12 +47,61 @@
         </Grid>
 
         <StackPanel Margin="20 30 0 0" DockPanel.Dock="Left" Orientation="Vertical">
-            <TextBlock Margin="0 0 0 20"  FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Departments"/>
-            <TextBlock Margin="0 0 0 20" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Offices"/>
-            <TextBlock Margin="0 0 0 20" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Job Titles"/>
+            <TextBlock Margin="0 0 0 3" FontWeight="DemiBold" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Departments"/>
+            <ItemsControl Name="DepartmentsDiv">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="14"  Text="{Binding Path=Key}"></TextBlock>
+                            <TextBlock FontSize="14" Text="{Binding Path=Value, StringFormat= ({0})}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Separator Margin="0 5 0 0"/>
+
+            <TextBlock Margin="0 5 0 3" FontWeight="DemiBold" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Offices"/>
+            <ItemsControl Name="OfficesDiv">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="14" Text="{Binding Path=Key}"></TextBlock>
+                            <TextBlock FontSize="14" Text="{Binding Path=Value, StringFormat= ({0})}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Separator Margin="0 4 0 0"/>
+            <TextBlock Margin="0 5 0 3" FontWeight="DemiBold" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Job Titles"/>
+            <ItemsControl Name="JobTitlesDiv">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="14"  Text="{Binding Path=Key}"></TextBlock>
+                            <TextBlock FontSize="14" Text="{Binding Path=Value, StringFormat= ({0})}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
             <Button HorizontalAlignment="Left" Foreground="{StaticResource PrimaryColour}" Background="white" BorderBrush="White" Content="view more"></Button>
         </StackPanel>
-        <Grid Margin="80 5 0 0">
+        <Grid Margin="20 5 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -81,7 +130,7 @@
                     <ItemsControl Name="EmployeeCards">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <WrapPanel Margin="10"/>
+                                <WrapPanel Margin="10 10 5 10"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>

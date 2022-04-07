@@ -9,7 +9,7 @@ namespace EmployeeDirectory_WPF.Data
 {
     public static class EmployeeData
     {
-        public static List<Employee> employees = new List<Employee>
+        public static List<Employee> Employees = new List<Employee>
         {
             new Employee("Anthony","Morris","anthonymorris@gmail.com",new DateOnly(1996,12,10),"Sharepoint Practice Head","IT Department",2,8464832529,35000),
             new Employee("Andrew","Philips","andrewphilips@gmail.com",new DateOnly(1996,10,1),"Web Developer","IT Department",0,8464892523,48000),
@@ -21,6 +21,31 @@ namespace EmployeeDirectory_WPF.Data
             new Employee("Paul","Rudd","paulrudd@gmail.com",new DateOnly(1996,10,1),"Talent Magnet Jr.","HR Department",7,8466892523,25000),
             new Employee("Mark","Ruffalo","markrufallo@gmail.com",new DateOnly(1996,10,1),"Junior Software Developer","IT Department",0,8467892523,48000),
             new Employee("Natasha","Romanoff","natasharomanoff@gmail.com",new DateOnly(1996,10,1),"Head HR","HR Department",1,8468892523,50000),
+
+        };
+        public static Dictionary<string, int> Departments = new Dictionary<string, int>
+        {
+            { "IT Department",7},
+            { "HR Department",2},
+            { "UX Department",1 }
+        };
+        public static Dictionary<string, int> Offices = new Dictionary<string, int>
+        {
+            { "India",7 },
+            { "Seattle",3 }
+        };
+        public static Dictionary<string, int> JobTitles = new Dictionary<string, int>
+        {
+            { "Sharepoint Practice Head",1 },
+            { "Web Developer",1 },
+            {"Operations Manager",1 },
+            {"Product Manager",1 },
+            {"Software Engineer",1 },
+            {"Lead Engineer Dot Net",1 },
+            {"UI Designer",1 },
+            {"Talent Magnet Jr.",1 },
+            {"Junior Software Developer",1 },
+            {"Head HR",1 },
 
         };
 
