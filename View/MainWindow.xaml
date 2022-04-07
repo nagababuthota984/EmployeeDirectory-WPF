@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa5="http://schemas.fontawesome.com/icons/"
+        xmlns:models="clr-namespace:EmployeeDirectory_WPF.Models"
         xmlns:local="clr-namespace:EmployeeDirectory_WPF"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
@@ -51,7 +52,7 @@
             <TextBlock Margin="0 0 0 20" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Job Titles"/>
             <Button HorizontalAlignment="Left" Foreground="{StaticResource PrimaryColour}" Background="white" BorderBrush="White" Content="view more"></Button>
         </StackPanel>
-        <Grid Margin="80 30 0 0">
+        <Grid Margin="80 5 0 0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -73,29 +74,37 @@
                     <ComboBoxItem Content="Skype Id"></ComboBoxItem>
                 </ComboBox>
             </StackPanel>
-
             <Button Margin="0 0 15 0" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2" Height="30" Width="125" Content="Add Employee" Foreground="White" BorderBrush="{StaticResource PrimaryColour}" Background="{StaticResource PrimaryColour}" />
             <Grid Margin="0 0 15 0" Grid.Row="1" Grid.ColumnSpan="3" ShowGridLines="True">
                 <Border BorderBrush="#DEDEDE" BorderThickness="1">
-                <WrapPanel Margin="10">
-                    <StackPanel Background="#DFDEDE" Orientation="Horizontal" Width="210" Height="70" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <Image Margin="10 0 0 0" Height="{StaticResource UserDPHeight}" Width="{StaticResource UserDPWidth}" Source="/Images/andrew-philips.png"></Image>
-                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 0 0">
-                            <TextBlock FontSize="13" FontWeight="DemiBold">Andrew Philips</TextBlock>
-                            <TextBlock>Sharepoint Practice Head</TextBlock>
-                            <TextBlock >IT Department</TextBlock>
-                            <StackPanel Orientation="Horizontal">
-                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}"  Icon="Solid_Phone" Width="10" Height="10" HorizontalAlignment="Left" />
-                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Envelope" Width="10" Height="10" />
-                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Comment" Width="10" Height="10" HorizontalAlignment="Left" />
-                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Star" Width="10" Height="10" HorizontalAlignment="Left" />
-                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Heart" Width="10" Height="10" HorizontalAlignment="Left" />
-
-                            </StackPanel>
-
-                        </StackPanel>
-                    </StackPanel>
-                </WrapPanel>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                    <ItemsControl Name="EmployeeCards">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Margin="10"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Background="#DFDEDE" Width="205" Height="70" Margin="0 0 10 10">
+                                    <Image Margin="10 0 0 0" Height="{StaticResource UserDPHeight}" Width="{StaticResource UserDPWidth}" Source="/Images/andrew-philips.png"></Image>
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 0 0">
+                                        <TextBlock FontSize="13" FontWeight="DemiBold" Text="{Binding PreferredName}"></TextBlock>
+                                        <TextBlock Text="{Binding JobTitle}"></TextBlock>
+                                        <TextBlock Text="{Binding Department}"></TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <fa5:ImageAwesome Margin="{StaticResource IconMargin}"  Icon="Solid_Phone" Width="10" Height="10" HorizontalAlignment="Left" />
+                                            <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Envelope" Width="10" Height="10" />
+                                            <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Comment" Width="10" Height="10" HorizontalAlignment="Left" />
+                                            <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Star" Width="10" Height="10" HorizontalAlignment="Left" />
+                                            <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Heart" Width="10" Height="10" HorizontalAlignment="Left" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
                 </Border>
             </Grid>
 

@@ -1,0 +1,28 @@
+﻿using EmployeeDirectory_WPF.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace EmployeeDirectory_WPF.Data
+{
+    public static class EmployeeData
+    {
+        public static List<Employee> employees = new List<Employee>
+        {
+            new Employee("Anthony","Morris","anthonymorris@gmail.com",new DateOnly(1996,12,10),"Sharepoint Practice Head","IT Department",2,8464832529,35000),
+            new Employee("Andrew","Philips","andrewphilips@gmail.com",new DateOnly(1996,10,1),"Web Developer","IT Department",0,8464892523,48000),
+            new Employee("Helen","Jimmerman","helenjimmerman@gmail.com",new DateOnly(1994,1,5),"Operations Manager","IT Department",4,8461892523,88000),
+            new Employee("Tami","Hopkins","tamihopkins@gmail.com",new DateOnly(1996,10,1),"Product Manager","IT Department",1,8463892523,48000),
+            new Employee("Olivia","Morris","oliviamorris@gmail.com",new DateOnly(1996,10,1),"Software Engineer","IT Department",3,8462892523,38000),
+            new Employee("Steve","Rogers","steverogers@gmail.com",new DateOnly(1996,10,1),"Lead Engineer Dot Net","IT Department",6,8464892523,30000),
+            new Employee("Tony","Stark","tonystark@gmail.com",new DateOnly(1996,10,1),"UI Designer","UX Department",9,8465892523,28000),
+            new Employee("Paul","Rudd","paulrudd@gmail.com",new DateOnly(1996,10,1),"Talent Magnet Jr.","HR Department",7,8466892523,25000),
+            new Employee("Mark","Ruffalo","markrufallo@gmail.com",new DateOnly(1996,10,1),"Junior Software Developer","IT Department",0,8467892523,48000),
+            new Employee("Natasha","Romanoff","natasharomanoff@gmail.com",new DateOnly(1996,10,1),"Head HR","HR Department",1,8468892523,50000),
+
+        };
+
+    }
+}

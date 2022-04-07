@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmployeeDirectory_WPF.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace EmployeeDirectory_WPF
         public MainWindow()
         {
             InitializeComponent();
+            EmployeeCards.ItemsSource = EmployeeData.employees;
         }
 
     }
