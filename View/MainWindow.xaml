@@ -21,7 +21,7 @@
 
 
     </Window.Resources>
-    <DockPanel LastChildFill="True">
+    <DockPanel >
 
         <Grid Margin="0 20 0 0"  DockPanel.Dock="Top" >
             <Grid.ColumnDefinitions>
@@ -48,56 +48,55 @@
 
         <StackPanel Margin="20 30 0 0" DockPanel.Dock="Left" Orientation="Vertical">
             <TextBlock Margin="0 0 0 3" FontWeight="DemiBold" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Departments"/>
-            <ItemsControl Name="DepartmentsDiv">
-                <ItemsControl.ItemsPanel>
+            <ListBox Name="DepartmentsDiv" BorderBrush="White"  SelectionMode="Single" SelectionChanged="FiltersClickHandler">
+                <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="14"  Text="{Binding Path=Key}"></TextBlock>
-                            <TextBlock FontSize="14" Text="{Binding Path=Value, StringFormat= ({0})}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <Separator Margin="0 5 0 0"/>
-
-            <TextBlock Margin="0 5 0 3" FontWeight="DemiBold" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Offices"/>
-            <ItemsControl Name="OfficesDiv">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock FontSize="14" Text="{Binding Path=Key}"></TextBlock>
-                            <TextBlock FontSize="14" Text="{Binding Path=Value, StringFormat= ({0})}"></TextBlock>
+                            <TextBlock FontSize="14" Text="{Binding Path=Value,StringFormat={} ({0})}"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <Separator Margin="0 4 0 0"/>
-            <TextBlock Margin="0 5 0 3" FontWeight="DemiBold" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Job Titles"/>
-            <ItemsControl Name="JobTitlesDiv">
-                <ItemsControl.ItemsPanel>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Separator Margin="0 5 0 0"/>
+            <TextBlock Margin="0 5 0 3" FontWeight="DemiBold" FontSize="{StaticResource SideNavbarHeadingFontSize}"   Text="Offices"/>
+            <ListBox Name="OfficesDiv" BorderBrush="White"  SelectionMode="Single" SelectionChanged="FiltersClickHandler">
+                <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Vertical"/>
                     </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="14"  Text="{Binding Path=Key}"></TextBlock>
-                            <TextBlock FontSize="14" Text="{Binding Path=Value, StringFormat= ({0})}"></TextBlock>
+                            <TextBlock FontSize="14" Text="{Binding Path=Key}"></TextBlock>
+                            <TextBlock FontSize="14" Text="{Binding Path=Value, StringFormat={} ({0})}"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                </ListBox.ItemTemplate>
+            </ListBox>
+            <Separator Margin="0 4 0 0"/>
+            <TextBlock Margin="0 5 0 3" FontWeight="DemiBold" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Job Titles"/>
+            <ListBox Name="JobTitlesDiv" BorderBrush="White"  SelectionMode="Single" SelectionChanged="FiltersClickHandler">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock FontSize="14" Text="{Binding Path=Key}"></TextBlock>
+                            <TextBlock FontSize="14" Text="{Binding Path=Value, StringFormat={} ({0})}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
             <Button HorizontalAlignment="Left" Foreground="{StaticResource PrimaryColour}" Background="white" BorderBrush="White" Content="view more"></Button>
         </StackPanel>

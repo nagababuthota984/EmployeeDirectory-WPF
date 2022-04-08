@@ -29,6 +29,13 @@ namespace EmployeeDirectory_WPF
             OfficesDiv.ItemsSource = EmployeeData.Offices;
             JobTitlesDiv.ItemsSource = EmployeeData.JobTitles;
         }
-
+        
+        public void FiltersClickHandler(object sender, SelectionChangedEventArgs e)
+        {
+            var lbox = (ListBox)sender;
+            MessageBox.Show(lbox.SelectedItem.ToString().Replace('[',',').Split(',')[1]);
+        }
+        
+       
     }
 }

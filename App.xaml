@@ -4,5 +4,6 @@
              xmlns:local="clr-namespace:EmployeeDirectory_WPF"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
+        
     </Application.Resources>
 </Application>

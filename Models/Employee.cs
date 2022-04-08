@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static EmployeeDirectory_WPF.Models.Enums;
 
 namespace EmployeeDirectory_WPF.Models
 {
@@ -19,9 +20,10 @@ namespace EmployeeDirectory_WPF.Models
         public int ExperienceInYears { get; set; }
         public long ContactNumber { get; set; }
         public decimal Salary { get; set; }
+        public EmployementType EmploymentType { get; set; }
         #endregion
 
-        public Employee(string firstName, string lastName, string email, DateOnly dob, string jobtitle, string department, int experienceInYears,long phoneNumber,decimal salary)
+        public Employee(string firstName, string lastName, string email, DateOnly dob, string jobtitle, string department, int experienceInYears,long phoneNumber,decimal salary,EmployementType empType)
         {
             this.FirstName = firstName;
             this.LastName = lastName;
@@ -33,6 +35,7 @@ namespace EmployeeDirectory_WPF.Models
             this.ExperienceInYears = experienceInYears;
             this.Salary = salary;
             this.ContactNumber = phoneNumber;
+            this.EmploymentType = empType;
         }
     }
 
