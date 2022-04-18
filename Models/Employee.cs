@@ -20,6 +20,7 @@ namespace EmployeeDirectory_WPF.Models
         public int ExperienceInYears { get; set; }
         public long ContactNumber { get; set; }
         public decimal Salary { get; set; }
+        
         public EmployementType EmploymentType { get; set; }
         #endregion
 
@@ -27,7 +28,7 @@ namespace EmployeeDirectory_WPF.Models
         {
             this.FirstName = firstName;
             this.LastName = lastName;
-            this.PreferredName = firstName +" "+ lastName;
+            this.PreferredName = $"{firstName} {lastName}";
             this.Email = email;
             this.Dob = dob;
             this.JobTitle = jobtitle;
@@ -36,6 +37,10 @@ namespace EmployeeDirectory_WPF.Models
             this.Salary = salary;
             this.ContactNumber = phoneNumber;
             this.EmploymentType = empType;
+        }
+        public Employee()
+        {
+
         }
     }
 

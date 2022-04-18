@@ -30,11 +30,6 @@ namespace EmployeeDirectory_WPF.Data
             { "HR Department",2},
             { "UX Department",1 }
         };
-        public static Dictionary<string, int> Offices = new Dictionary<string, int>
-        {
-            { "India",7 },
-            { "Seattle",3 }
-        };
         public static Dictionary<string, int> JobTitles = new Dictionary<string, int>
         {
             { "Sharepoint Practice Head",1 },

@@ -1,5 +1,8 @@
 ﻿using EmployeeDirectory_WPF.Data;
+using EmployeeDirectory_WPF.Models;
+using EmployeeDirectory_WPF.View;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,18 +27,12 @@ namespace EmployeeDirectory_WPF
         public MainWindow()
         {
             InitializeComponent();
-            EmployeeCards.ItemsSource = EmployeeData.Employees;
-            DepartmentsDiv.ItemsSource = EmployeeData.Departments;
-            OfficesDiv.ItemsSource = EmployeeData.Offices;
-            JobTitlesDiv.ItemsSource = EmployeeData.JobTitles;
+            MainContent.Content = new HomeView();
         }
-        
-        public void FiltersClickHandler(object sender, SelectionChangedEventArgs e)
+        public void GoHome()
         {
-            var lbox = (ListBox)sender;
-            MessageBox.Show(lbox.SelectedItem.ToString().Replace('[',',').Split(',')[1]);
+            MainContent.Content = new HomeView();
         }
         
-       
     }
 }

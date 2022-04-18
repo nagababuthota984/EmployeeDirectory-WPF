@@ -13,5 +13,6 @@ namespace EmployeeDirectory_WPF.Models
             Contract,
             Permanent
         }
+        
     }
 }
