@@ -32,6 +32,8 @@ namespace EmployeeDirectory_WPF.View
             EmployeeCards.ItemsSource = filteredData;
             DepartmentsDiv.ItemsSource = EmployeeData.Departments;
             JobTitlesDiv.ItemsSource = EmployeeData.JobTitles;
+
+
         }
         public void FiltersClickHandler(object sender, SelectionChangedEventArgs e)
         {
@@ -42,12 +44,9 @@ namespace EmployeeDirectory_WPF.View
                 string filterName = lbox.Name;
                 if (filterName.Equals("DepartmentsDiv", StringComparison.OrdinalIgnoreCase))
                     EmployeeCards.ItemsSource = GetEmployeesByDept(filterValue);
-
                 else
                     EmployeeCards.ItemsSource = GetEmployeesByJobTitle(filterValue);
-
             }
-
         }
 
         private IEnumerable GetEmployeesByJobTitle(string filterValue)
@@ -55,7 +54,7 @@ namespace EmployeeDirectory_WPF.View
             List<Employee> jobTitleFilteredData = new List<Employee>();
             foreach (Employee employee in EmployeeData.Employees)
             {
-                if (employee.JobTitle == filterValue)
+                if (employee.JobTitle.Equals(filterValue, StringComparison.OrdinalIgnoreCase))
                 {
                     jobTitleFilteredData.Add(employee);
                 }
@@ -71,7 +70,7 @@ namespace EmployeeDirectory_WPF.View
             List<Employee> deptFilteredData = new List<Employee>();
             foreach (Employee employee in EmployeeData.Employees)
             {
-                if (employee.Department == filterValue)
+                if (employee.Department.Equals(filterValue, StringComparison.OrdinalIgnoreCase))
                 {
                     deptFilteredData.Add(employee);
                 }
@@ -83,25 +82,50 @@ namespace EmployeeDirectory_WPF.View
         private void HandleSearchKeyUp(object sender, KeyEventArgs e)
         {
             var tb = sender as TextBox;
+            var filterCategory = Filter.Text;
             if (tb != null)
             {
-                EmployeeCards.ItemsSource = GetSearchFilteredData(tb.Text);
+                EmployeeCards.ItemsSource = GetSearchFilteredData(tb.Text, filterCategory);
             }
         }
-        private List<Employee> GetSearchFilteredData(string textToCompare)
+        private List<Employee> GetSearchFilteredData(string textToCompare, string filterCategory)
         {
             List<Employee> searchFilteredData = new List<Employee>();
-            foreach (Employee employee in filteredData)
+
+            if (filterCategory.Equals("Name"))
             {
-                if (employee.PreferredName.Contains(textToCompare, StringComparison.OrdinalIgnoreCase))
+                foreach (Employee employee in filteredData)
                 {
-                    searchFilteredData.Add(employee);
+                    if (employee.PreferredName.Contains(textToCompare, StringComparison.OrdinalIgnoreCase))
+                    {
+                        searchFilteredData.Add(employee);
+                    }
+                } 
+            }
+            else if(filterCategory.Equals("Email"))
+            {
+                foreach (Employee employee in filteredData)
+                {
+                    if (employee.Email.Contains(textToCompare, StringComparison.OrdinalIgnoreCase))
+                    {
+                        searchFilteredData.Add(employee);
+                    }
+                }
+            }
+            else
+            {
+                foreach (Employee employee in filteredData)
+                {
+                    if (employee.ContactNumber.ToString().Contains(textToCompare, StringComparison.OrdinalIgnoreCase))
+                    {
+                        searchFilteredData.Add(employee);
+                    }
                 }
             }
             return searchFilteredData;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void OpenAddEmployeeForm(object sender, RoutedEventArgs e)
         {
 
             Main.Visibility = Visibility.Collapsed;
@@ -122,7 +146,7 @@ namespace EmployeeDirectory_WPF.View
 
                 if (!string.IsNullOrWhiteSpace(firstName) || !string.IsNullOrEmpty(lastName))
                 {
-                    Employee emp = GetEmployeeByName(firstName, lastName);
+                    Employee emp = GetEmployeeByName(firstName + ' ' + lastName);
                     if (emp != null)
                     {
                         EditEmpView.fname.Text = emp.FirstName;
@@ -130,7 +154,7 @@ namespace EmployeeDirectory_WPF.View
                         EditEmpView.email.Text = emp.Email;
                         EditEmpView.jobtitle.Text = emp.JobTitle;
                         EditEmpView.department.Text = emp.Department;
-                        EditEmpView.dob.Text = emp.Dob.ToString();
+                        EditEmpView.dob.SelectedDate = emp.Dob;
                         EditEmpView.salary.Text = emp.Salary.ToString();
                         EditEmpView.experience.Text = emp.ExperienceInYears.ToString();
                     }
@@ -138,15 +162,20 @@ namespace EmployeeDirectory_WPF.View
             }
         }
 
-        private Employee GetEmployeeByName(string firstName, string lastName)
+        private Employee GetEmployeeByName(string preferredName)
         {
             foreach (var emp in EmployeeData.Employees)
             {
-                if (firstName.Equals(emp.FirstName, StringComparison.OrdinalIgnoreCase) && lastName.Equals(emp.LastName, StringComparison.OrdinalIgnoreCase))
+                if (preferredName.Equals(emp.PreferredName, StringComparison.OrdinalIgnoreCase))
                     return emp;
             }
             return null;
 
+        }
+        
+        private void FilterSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            EmployeeCards.ItemsSource = GetSearchFilteredData(Search.Text, Filter.Text);
         }
     }
 }

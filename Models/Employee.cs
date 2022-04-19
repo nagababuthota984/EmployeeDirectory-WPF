@@ -14,7 +14,7 @@ namespace EmployeeDirectory_WPF.Models
         public string LastName { get; set; }
         public string PreferredName { get; set; }
         public string Email { get; set; }
-        public DateOnly Dob { get; set; }
+        public DateTime Dob { get; set; }
         public string JobTitle { get; set; }
         public string Department { get; set; }
         public int ExperienceInYears { get; set; }
@@ -24,7 +24,7 @@ namespace EmployeeDirectory_WPF.Models
         public EmployementType EmploymentType { get; set; }
         #endregion
 
-        public Employee(string firstName, string lastName, string email, DateOnly dob, string jobtitle, string department, int experienceInYears,long phoneNumber,decimal salary,EmployementType empType)
+        public Employee(string firstName, string lastName, string email, DateTime dob, string jobtitle, string department, int experienceInYears,long phoneNumber,decimal salary,EmployementType empType)
         {
             this.FirstName = firstName;
             this.LastName = lastName;

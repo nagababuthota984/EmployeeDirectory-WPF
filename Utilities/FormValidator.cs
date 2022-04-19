@@ -12,32 +12,41 @@ namespace EmployeeDirectory_WPF.Utilities
 {
     public class FormValidator
     {
-        public static (bool,Employee) IsValidFormData(string firstName,string lastName,string emailId,string jobTitle,string dept,string salary,string experience)
+        public static (bool,Employee) IsValidFormData(string firstName,string lastName,string emailId,string jobTitle,string dept,string salary,string experience,DateTime? dob)
         {
             
             long phoneNumber = 8464832529;
             int experienceInYears;
             decimal MonthlySalary;
-            if (FormValidator.IsValidString(firstName) && FormValidator.IsValidString(lastName) && FormValidator.IsValidString(jobTitle) && FormValidator.IsValidString(dept))
+            if (IsValidString(firstName) && IsValidString(lastName) && IsValidString(jobTitle) && IsValidString(dept))
             {
-                if (FormValidator.IsValidEmailFormat(emailId) || EmployeeData.Employees.Any(emp => emp.Email.Equals(emailId, StringComparison.OrdinalIgnoreCase)))
+                if (IsValidEmailFormat(emailId) || EmployeeData.Employees.Any(emp => emp.Email.Equals(emailId, StringComparison.OrdinalIgnoreCase)))
                 {
                     if (decimal.TryParse(salary, out MonthlySalary))
                     {
                         if (int.TryParse(experience, out experienceInYears))
                         {
-                            Employee employee = new Employee();
-                            employee.FirstName = firstName;
-                            employee.LastName = lastName;
-                            employee.Email = emailId;
-                            employee.JobTitle = jobTitle;
-                            employee.Department = dept;
-                            employee.ExperienceInYears = experienceInYears;
-                            employee.Salary = MonthlySalary;
-                            employee.ContactNumber = phoneNumber;
-                            return (true,employee);
+                            if (dob<DateTime.Now)
+                            {
+                                Employee employee = new Employee();
+                                employee.FirstName = firstName;
+                                employee.LastName = lastName;
+                                employee.PreferredName = $"{firstName} {lastName}";
+                                employee.Email = emailId;
+                                employee.JobTitle = jobTitle;
+                                employee.Department = dept;
+                                employee.ExperienceInYears = experienceInYears;
+                                employee.Salary = MonthlySalary;
+                                employee.ContactNumber = phoneNumber;
+                                employee.Dob = (DateTime)dob;
+                                return (true, employee); 
+                            }
+                            else
+                            {
+                                MessageBox.Show("Invalid Dob");
+                            }
                         }
-                        MessageBox.Show("Invalid exp");
+                        MessageBox.Show("Invalid experience. Should enter only digits");
                     }
                     MessageBox.Show("invalid salary");
                 }

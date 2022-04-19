@@ -34,12 +34,13 @@ namespace EmployeeDirectory_WPF.View
         }
         private void UpdateEmployeeDetails(object sender, RoutedEventArgs e)
         {
-            (bool, Employee) tpl = FormValidator.IsValidFormData(fname.Text, lname.Text, email.Text, jobtitle.Text, department.Text, salary.Text, experience.Text);
+            (bool, Employee) tpl = FormValidator.IsValidFormData(fname.Text, lname.Text, email.Text, jobtitle.Text, department.Text, salary.Text, experience.Text,(DateTime)dob.SelectedDate);
             if (tpl.Item1 && tpl.Item2 != null)
             {
                 EmployeeData.Employees.Remove(EmployeeData.Employees.FirstOrDefault(emp=> emp.Email.Equals(tpl.Item2.Email,StringComparison.OrdinalIgnoreCase)));
                 EmployeeData.Employees.Add(tpl.Item2);
-                MessageBox.Show(tpl.Item2.FirstName);
+                EmployeeData.WriteToJson("Employee");
+                MessageBox.Show("Updated Successfully");
             }
         }
       

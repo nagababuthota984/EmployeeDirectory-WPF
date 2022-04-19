@@ -101,19 +101,8 @@
                 <ColumnDefinition Width="230"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                <Label HorizontalAlignment="Left" FontSize="14" FontWeight="DemiBold" Height="30" Content="Search:"></Label>
-                <TextBox Focusable="True" KeyUp="HandleSearchKeyUp"  Padding="5" Height="30" Width="150" ></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
-                <Label FontSize="14" FontWeight="DemiBold"  Height="30" Content="Filter By:"></Label>
-                <ComboBox  Padding="7" Height="30" Width="120" >
-                    <ComboBoxItem IsSelected="True" Content="Name"></ComboBoxItem>
-                    <ComboBoxItem Content="Phone number"></ComboBoxItem>
-                    <ComboBoxItem Content="Skype Id"></ComboBoxItem>
-                </ComboBox>
-            </StackPanel>
-            <Button Margin="0 0 15 0" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2" Height="30" Width="125" Content="Add Employee" Foreground="White" BorderBrush="{StaticResource PrimaryColour}" Background="{StaticResource PrimaryColour}" Click="Button_Click" />
+            
+            <Button Margin="0 0 15 0" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2" Height="30" Width="125" Content="Add Employee" Foreground="White" BorderBrush="{StaticResource PrimaryColour}" Background="{StaticResource PrimaryColour}" Click="OpenAddEmployeeForm" />
             <Grid Margin="0 0 15 0" Grid.Row="1" Grid.ColumnSpan="3" ShowGridLines="True">
                 <Border BorderBrush="#DEDEDE" BorderThickness="1">
                     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
@@ -149,9 +138,21 @@
                     </ScrollViewer>
                 </Border>
             </Grid>
+                <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label HorizontalAlignment="Left" FontSize="14" FontWeight="DemiBold" Height="30" Content="Search:"></Label>
+                    <TextBox Name="Search" Focusable="True" KeyUp="HandleSearchKeyUp"  Padding="5" Height="30" Width="150" ></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
+                    <Label FontSize="14" FontWeight="DemiBold"  Height="30" Content="Filter By:"></Label>
+                    <ComboBox Name="Filter" Padding="7" Height="30" Width="120" SelectionChanged="FilterSelectionChanged" >
+                        <ComboBoxItem IsSelected="True">Name</ComboBoxItem>
+                        <ComboBoxItem >Contact Number</ComboBoxItem>
+                        <ComboBoxItem >Email</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
 
 
-        </Grid>
+            </Grid>
 
     </DockPanel>
     <views:AddEmployee Visibility="Collapsed" x:Name="addEmpView" HorizontalAlignment="Center" VerticalAlignment="Center"></views:AddEmployee>

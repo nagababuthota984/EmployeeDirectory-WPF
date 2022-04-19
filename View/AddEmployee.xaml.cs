@@ -40,18 +40,46 @@ namespace EmployeeDirectory_WPF.View
         {
            
 
-            (bool,Employee) tpl = FormValidator.IsValidFormData(fname.Text, lname.Text, email.Text, jobtitle.Text, department.Text, salary.Text, experience.Text);
+            (bool,Employee) tpl = FormValidator.IsValidFormData(fname.Text, lname.Text, email.Text, jobtitle.Text, department.Text, salary.Text, experience.Text, dob.SelectedDate);
             if (tpl.Item1 && tpl.Item2!=null)
             {
                 EmployeeData.Employees.Add(tpl.Item2);
-                MessageBox.Show(tpl.Item2.FirstName);
+                AddDepartment(tpl.Item2.Department);
+                AddJobTitle(tpl.Item2.JobTitle);
+                MessageBox.Show($"{tpl.Item2.FirstName} has been added successfully");
             }
         }
 
-       
+        private void AddJobTitle(string jobTitle)
+        {
+            if(!string.IsNullOrEmpty(jobTitle))
+            {
+                foreach(var job in EmployeeData.JobTitles.Keys)
+                {
+                    if(job.ToLower().Trim().Equals(jobTitle.ToLower().Trim()))
+                    {
+                        EmployeeData.JobTitles[job] += 1;
+                        return;
+                    }
+                }
+                EmployeeData.JobTitles.Add(jobTitle, 1);
+            }
+        }
 
-        
-
-        
+        private void AddDepartment(string department)
+        {
+            if (!string.IsNullOrEmpty(department))
+            {
+                foreach (var job in EmployeeData.Departments.Keys)
+                {
+                    if (job.ToLower().Trim().Equals(department.ToLower().Trim()))
+                    {
+                        EmployeeData.Departments[job] += 1;
+                        return;
+                    }
+                }
+                EmployeeData.Departments.Add(department, 1);
+            }
+        }
     }
 }

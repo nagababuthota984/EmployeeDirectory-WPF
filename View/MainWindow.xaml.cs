@@ -27,12 +27,11 @@ namespace EmployeeDirectory_WPF
         public MainWindow()
         {
             InitializeComponent();
+            EmployeeData.LoadDataFromJson();
             MainContent.Content = new HomeView();
+
         }
-        public void GoHome()
-        {
-            MainContent.Content = new HomeView();
-        }
+        
         
     }
 }
