@@ -6,13 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../StyleResources.xaml"></ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
+    
     <Grid HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition />
@@ -45,7 +39,7 @@
         <TextBlock VerticalAlignment="Top" Grid.Row="4" Grid.Column="1" Text="Experience in Years" ></TextBlock>
         <TextBox Name="experience" Margin="{StaticResource NoMargin}" Grid.Row="4" Grid.Column="1"></TextBox>
         <Button Name="SubmitBtn"  Background="{StaticResource PrimaryColour}" Foreground="Navy" FontWeight="{StaticResource DemiBold}" Grid.Row="5" Height="30" Width="190" Margin="0 0 10 0" ></Button>
-        <Button Content="Cancel" Background="Red" Grid.Row="5" Grid.Column="1" FontWeight="{StaticResource DemiBold}" Height="30" Width="190" Margin="0 0 10 0" Click="OnCancel" ></Button>
+        <Button Name="CancelBtn"  Content="Cancel" Background="Red" Grid.Row="5" Grid.Column="1" FontWeight="{StaticResource DemiBold}" Height="30" Width="190" Margin="0 0 10 0" Click="OnCancel" ></Button>
 
     </Grid>
 </UserControl>

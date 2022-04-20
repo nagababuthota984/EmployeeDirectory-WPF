@@ -1,5 +1,7 @@
 ﻿using EmployeeDirectory_WPF.Models;
+using EmployeeDirectory_WPF.ViewModels;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -10,6 +12,7 @@ namespace EmployeeDirectory_WPF.Data
         public static string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
 
         public static List<Employee> Employees = new List<Employee>();
+        public static List<HomeViewModel> HomeViewModels = new List<HomeViewModel>();
         public static Dictionary<string, int> Departments = new Dictionary<string, int>();
         public static Dictionary<string, int> JobTitles = new Dictionary<string, int>();
 
@@ -23,6 +26,7 @@ namespace EmployeeDirectory_WPF.Data
             string data = File.ReadAllText($"{projectDirectory}\\Data\\EmployeeData.json");
             if (string.IsNullOrEmpty(data)) Employees = new List<Employee>();
             Employees =  JsonConvert.DeserializeObject<List<Employee>>(data);
+            HomeViewModels = Employees.ConvertAll<HomeViewModel>(new Converter<Employee, HomeViewModel>(HomeViewModel.EmployeeToHomeViewModel));
 
             data = File.ReadAllText($"{projectDirectory}\\Data\\JobTitles.json");
             if (string.IsNullOrEmpty(data)) JobTitles = new Dictionary<string, int>();

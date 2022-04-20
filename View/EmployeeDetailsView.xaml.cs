@@ -1,6 +1,7 @@
 ﻿using EmployeeDirectory_WPF.Data;
 using EmployeeDirectory_WPF.Models;
 using EmployeeDirectory_WPF.Utilities;
+using EmployeeDirectory_WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +45,9 @@ namespace EmployeeDirectory_WPF.View
                 EmployeeData.Employees.Remove(EmployeeData.Employees.FirstOrDefault(emp => emp.Email.Equals(tpl.Item2.Email, StringComparison.OrdinalIgnoreCase)));
                 EmployeeData.Employees.Add(tpl.Item2);
                 EmployeeData.WriteToJson("Employee");
+                EmployeeData.HomeViewModels = EmployeeData.Employees.ConvertAll<HomeViewModel>(new System.Converter<Employee, HomeViewModel>(HomeViewModel.EmployeeToHomeViewModel));
                 MessageBox.Show("Updated Successfully");
+                Application.Current.MainWindow.Content = new HomeView();
             }
         }
         public void HandleAddEmployee(object sender, RoutedEventArgs e)
@@ -53,9 +56,13 @@ namespace EmployeeDirectory_WPF.View
             if (tpl.Item1 && tpl.Item2 != null)
             {
                 EmployeeData.Employees.Add(tpl.Item2);
+                EmployeeData.HomeViewModels = EmployeeData.Employees.ConvertAll<HomeViewModel>(new System.Converter<Employee, HomeViewModel>(HomeViewModel.EmployeeToHomeViewModel));
+                EmployeeData.WriteToJson("Employee");
                 AddDepartment(tpl.Item2.Department);
                 AddJobTitle(tpl.Item2.JobTitle);
                 MessageBox.Show($"{tpl.Item2.FirstName} has been added successfully");
+                Application.Current.MainWindow.Content = new HomeView();
+
             }
         }
         private void AddJobTitle(string jobTitle)
