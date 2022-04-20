@@ -112,10 +112,18 @@
                                         <StackPanel Orientation="Horizontal" Background="#DFDEDE" Width="205" Height="70" Margin="0 0 10 10">
                                             <Image Margin="10 0 0 0" Height="{StaticResource UserDPHeight}" Width="{StaticResource UserDPWidth}" Source="/Images/andrew-philips.png"></Image>
                                             <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 0 0">
-                                                <Button BorderThickness="0" HorizontalAlignment="Left" Click="EditEmployeeDetails" FontSize="13" FontWeight="{StaticResource DemiBold}" Content="{Binding PreferredName}">
-
+                                                <Button BorderThickness="0" Click="EditEmployeeDetails" HorizontalAlignment="Left"  FontSize="13" FontWeight="{StaticResource DemiBold}">
+                                                    <Button.Content>
+                                                        <TextBlock>
+                                                            <TextBlock.Text>
+                                                                <MultiBinding StringFormat="{}{0} {1}">
+                                                                    <Binding Path="FirstName"/>
+                                                                    <Binding Path="LastName"/>
+                                                                </MultiBinding>
+                                                            </TextBlock.Text>
+                                                        </TextBlock>
+                                                    </Button.Content>
                                                 </Button>
-
                                                 <TextBlock Text="{Binding JobTitle}"></TextBlock>
                                                 <TextBlock Text="{Binding Department}"></TextBlock>
                                                 <StackPanel Orientation="Horizontal">

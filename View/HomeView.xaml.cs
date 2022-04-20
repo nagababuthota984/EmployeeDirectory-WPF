@@ -91,12 +91,13 @@ namespace EmployeeDirectory_WPF.View
             var btn = sender as Button;
             if (btn != null)
             {
-                string firstName, lastName;
-                firstName = btn.Content.ToString().Split(' ')[0];
-                lastName = btn.Content.ToString().Split(' ')[1];
-                if (!string.IsNullOrWhiteSpace(firstName) || !string.IsNullOrEmpty(lastName))
+
+                var tb = (TextBlock)btn.Content;
+                
+                
+                if (!string.IsNullOrWhiteSpace(tb.Text) )
                 {
-                    SelectedEmployee = GetEmployeeByName(firstName + ' ' + lastName);
+                    SelectedEmployee = GetEmployeeByName(tb.Text);
                 }
             }
             EmpDetailsView.LoadFormContent(SelectedEmployee);
