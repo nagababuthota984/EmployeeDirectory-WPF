@@ -6,8 +6,7 @@
         xmlns:views="clr-namespace:EmployeeDirectory_WPF.View"
         mc:Ignorable="d"
         Title="Employee Directory" MinHeight="450" MinWidth="800">
-    <Window.Resources>
-    </Window.Resources>
+
     <StackPanel>
         <ContentControl Name="MainContent" Width="Auto" ></ContentControl>
     </StackPanel>

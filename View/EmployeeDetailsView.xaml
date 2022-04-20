@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="EmployeeDirectory_WPF.View.AddEmployee"
+﻿<UserControl x:Class="EmployeeDirectory_WPF.View.EmployeeDetailsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,18 +6,13 @@
              xmlns:local="clr-namespace:EmployeeDirectory_WPF.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="0 0 10 0"></Setter>
-            <Setter Property="Padding" Value="3"/>
-            <Setter Property="Height" Value="30"></Setter>
-            <Setter Property="VerticalAlignment" Value="Center"></Setter>
 
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="FontWeight" Value="DemiBold"/>
-        </Style>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../StyleResources.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
@@ -31,36 +26,27 @@
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
-
         </Grid.RowDefinitions>
-        <TextBlock Margin="0 10 0 20" Foreground="{StaticResource PrimaryColour}" Grid.Row="0" Grid.ColumnSpan="2" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Text="New Employee Details"></TextBlock>
+        <TextBlock Name="Heading" Margin="0 10 0 20" Foreground="{StaticResource PrimaryColour}" Grid.Row="0" Grid.ColumnSpan="2" FontSize="30" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Edit Employee Details"></TextBlock>
         <Separator Margin="0 0 0 10" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" />
         <TextBlock VerticalAlignment="Top" Grid.Row="1" Text="First Name" ></TextBlock>
         <TextBox Name="fname" Grid.Row="1"></TextBox>
         <TextBlock VerticalAlignment="Top" Grid.Row="2" Text="Email " ></TextBlock>
-        <TextBox Name="email" Grid.Row="2"></TextBox>
+        <TextBox Name="email" IsEnabled="False" Grid.Row="2"></TextBox>
         <TextBlock VerticalAlignment="Top" Grid.Row="3" Text="Job Title" ></TextBlock>
         <TextBox Name="jobtitle" Grid.Row="3"></TextBox>
         <TextBlock VerticalAlignment="Top" Grid.Row="4" Text="Department" ></TextBlock>
         <TextBox Name="department" Grid.Row="4"></TextBox>
-        <TextBlock  Grid.Row="5" Text="Contact Number"></TextBlock>
-        <TextBox Name="phone" Grid.Row="5"></TextBox>
         <TextBlock VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Text="Last Name" ></TextBlock>
-        <TextBox Name="lname" Margin="0 0 0 0" Grid.Row="1" Grid.Column="1"></TextBox>
+        <TextBox Name="lname" Margin="{StaticResource NoMargin}" Grid.Row="1" Grid.Column="1"></TextBox>
         <TextBlock VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" Text="Date Of Birth" ></TextBlock>
-        <DatePicker Name="dob" Margin="0 0 0 0" Height="30" Padding="5" Grid.Row="2" Grid.Column="1"></DatePicker>
+        <DatePicker Name="dob" Margin="{StaticResource NoMargin}" Height="30" Padding="5" Grid.Row="2" Grid.Column="1"></DatePicker>
         <TextBlock VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" Text="Salary" ></TextBlock>
-        <TextBox Name="salary" Margin="0 0 0 0" Grid.Row="3" Grid.Column="1"></TextBox>
+        <TextBox Name="salary" Margin="{StaticResource NoMargin}" Grid.Row="3" Grid.Column="1"></TextBox>
         <TextBlock VerticalAlignment="Top" Grid.Row="4" Grid.Column="1" Text="Experience in Years" ></TextBlock>
-        <TextBox Name="experience" Margin="0 0 0 0" Grid.Row="4" Grid.Column="1"></TextBox>
-        <TextBlock Margin="0 0 0 5" Grid.Row="5" Text="Employement Type" Grid.Column="1"></TextBlock>
-        <ComboBox Height="30" Padding="5" Name="employementType" Grid.Row="5" Grid.Column="1">
-            <ComboBoxItem IsSelected="True" Content="Permanent"></ComboBoxItem>
-            <ComboBoxItem Content="Contract"></ComboBoxItem>
-        </ComboBox>
-        <Button Content="AddEmployee" Background="{StaticResource PrimaryColour}" Foreground="Navy" FontWeight="DemiBold" Grid.Row="6" Height="30" Width="190" Margin="0 0 10 0" Click="HandleAddEmployee" ></Button>
-        <Button Content="Cancel" Background="Red" Grid.Row="6" Grid.Column="1" FontWeight="DemiBold" Height="30" Width="190" Margin="0 0 10 0" Click="OnCancel" ></Button>
+        <TextBox Name="experience" Margin="{StaticResource NoMargin}" Grid.Row="4" Grid.Column="1"></TextBox>
+        <Button Name="SubmitBtn"  Background="{StaticResource PrimaryColour}" Foreground="Navy" FontWeight="{StaticResource DemiBold}" Grid.Row="5" Height="30" Width="190" Margin="0 0 10 0" ></Button>
+        <Button Content="Cancel" Background="Red" Grid.Row="5" Grid.Column="1" FontWeight="{StaticResource DemiBold}" Height="30" Width="190" Margin="0 0 10 0" Click="OnCancel" ></Button>
 
     </Grid>
 </UserControl>

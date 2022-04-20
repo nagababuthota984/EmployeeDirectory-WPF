@@ -12,7 +12,7 @@ namespace EmployeeDirectory_WPF.Utilities
 {
     public class FormValidator
     {
-        public static (bool,Employee) IsValidFormData(string firstName,string lastName,string emailId,string jobTitle,string dept,string salary,string experience,DateTime? dob)
+        public static (bool,Employee) IsValidFormData(string firstName,string lastName,string emailId,string jobTitle,string dept,string salary,string experience,DateTime dob)
         {
             
             long phoneNumber = 8464832529;
@@ -26,7 +26,7 @@ namespace EmployeeDirectory_WPF.Utilities
                     {
                         if (int.TryParse(experience, out experienceInYears))
                         {
-                            if (dob<DateTime.Now)
+                            if (DateTime.Today.Year - dob.Year >20 )
                             {
                                 Employee employee = new Employee();
                                 employee.FirstName = firstName;
@@ -38,7 +38,7 @@ namespace EmployeeDirectory_WPF.Utilities
                                 employee.ExperienceInYears = experienceInYears;
                                 employee.Salary = MonthlySalary;
                                 employee.ContactNumber = phoneNumber;
-                                employee.Dob = (DateTime)dob;
+                                employee.Dob = dob;
                                 return (true, employee); 
                             }
                             else

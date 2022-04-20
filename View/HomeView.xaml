@@ -7,156 +7,149 @@
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              xmlns:models="clr-namespace:EmployeeDirectory_WPF.Models"
              xmlns:views="clr-namespace:EmployeeDirectory_WPF.View"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              >
     <UserControl.Resources>
-        <SolidColorBrush x:Key="PrimaryColour" Color="#01B0FC"></SolidColorBrush>
-        <sys:Double x:Key="TopHeaderFontSize">20</sys:Double>
-        <sys:Double x:Key="SideNavbarHeadingFontSize">16</sys:Double>
-        <sys:Double x:Key="UserDPWidth">50</sys:Double>
-        <sys:Double x:Key="UserDPHeight">50</sys:Double>
-        <Thickness x:Key="IconMargin">0 3 6 3</Thickness>
-        <Style TargetType="TextBlock">
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="#01B0FC"></Setter>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../StyleResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <StackPanel>
-    <DockPanel x:Name="Main" >
-        <Grid   Margin="0 20 0 0"  DockPanel.Dock="Top" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                <ColumnDefinition ></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70"></RowDefinition>
-                <RowDefinition ></RowDefinition>
-            </Grid.RowDefinitions>
-            <Image Grid.Column="0" Grid.Row="0" Source="/Images/saketa-logo.jpg" Width="170" ></Image>
-            <StackPanel Margin="20 0 0 0" Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center">
-                <TextBlock FontSize="30" Foreground="{StaticResource PrimaryColour}"  Text="Employee Directory"></TextBlock>
-                <TextBlock FontSize="15" Text="The Ultimate People Directory Experience"></TextBlock>
+        <!--avoid dock panel in most of the cases-->
+        <DockPanel x:Name="Main" >   
+            <Grid  Margin="0 20 0 0"  DockPanel.Dock="Top" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image  Source="/Images/saketa-logo.jpg" Width="170" ></Image>
+                <StackPanel Margin="20 0 0 0" Orientation="Vertical" Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock FontSize="{StaticResource MainHeadingFontSize}" Foreground="{StaticResource PrimaryColour}"  Text="Employee Directory"></TextBlock>
+                    <TextBlock FontSize="15" Text="The Ultimate People Directory Experience"></TextBlock>
+                </StackPanel>
+                <StackPanel  Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <TextBlock FontSize="{StaticResource GreetUserFontSize}" VerticalAlignment="Bottom" Foreground="{StaticResource PrimaryColour}"  Text="Welcome,"></TextBlock>
+                    <TextBlock FontSize="{StaticResource GreetUserFontSize}" VerticalAlignment="Bottom" Text=" Andrew Philips"></TextBlock>
+                    <Ellipse Margin="3 0 10 0" Width="50" Height="50" Grid.Column="2" Grid.Row="0">
+                        <Ellipse.Fill>
+                            <ImageBrush  ImageSource="/Images/andrew-philips.png"></ImageBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </StackPanel>
+                <Separator Margin="10" Grid.Row="1" Grid.ColumnSpan="3"/>
+            </Grid>
+
+            <StackPanel  Margin="20 30 0 0" DockPanel.Dock="Left" Orientation="Vertical">
+                <TextBlock Margin="0 0 0 3" FontWeight="{StaticResource DemiBold}" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Departments"/>
+                <ListBox Name="DepartmentsDiv" 
+                     BorderBrush="White" 
+                     SelectionMode="Single" 
+                     SelectionChanged="FiltersClickHandler" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="14" Text="{Binding Path=Key}"></TextBlock>
+                                <TextBlock FontSize="14" Text="{Binding Path=Value,StringFormat={} ({0})}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <Separator Margin="0 5 0 0"/>
+
+                <TextBlock Margin="0 5 0 3" FontWeight="{StaticResource DemiBold}" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Job Titles"/>
+                <ListBox Name="JobTitlesDiv" BorderBrush="White"  SelectionMode="Single" SelectionChanged="FiltersClickHandler">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="14" Text="{Binding Path=Key}"></TextBlock>
+                                <TextBlock FontSize="14" Text="{Binding Path=Value, StringFormat={} ({0})}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <Button HorizontalAlignment="Left" Foreground="{StaticResource PrimaryColour}" Background="white" BorderBrush="White" Content="view more"></Button>
             </StackPanel>
-            <StackPanel  Orientation="Horizontal" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
-                <TextBlock FontSize="{StaticResource TopHeaderFontSize}" VerticalAlignment="Bottom" Foreground="{StaticResource PrimaryColour}"  Text="Welcome,"></TextBlock>
-                <TextBlock FontSize="{StaticResource TopHeaderFontSize}" VerticalAlignment="Bottom" Text=" Andrew Philips"></TextBlock>
-                <Ellipse Margin="3 0 10 0" Width="50" Height="50" Grid.Column="2" Grid.Row="0">
-                    <Ellipse.Fill>
-                        <ImageBrush  ImageSource="/Images/andrew-philips.png"></ImageBrush>
-                    </Ellipse.Fill>
-                </Ellipse>
-            </StackPanel>
-            <Separator Margin="10" Grid.Row="1" Grid.ColumnSpan="3"/>
-        </Grid>
-        <StackPanel  Margin="20 30 0 0" DockPanel.Dock="Left" Orientation="Vertical">
-            <TextBlock Margin="0 0 0 3" FontWeight="DemiBold" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Departments"/>
-            <ListBox Name="DepartmentsDiv" BorderBrush="White" SelectionMode="Single" SelectionChanged="FiltersClickHandler" >
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="14" Text="{Binding Path=Key}"></TextBlock>
-                            <TextBlock FontSize="14" Text="{Binding Path=Value,StringFormat={} ({0})}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <Separator Margin="0 5 0 0"/>
+            <Grid Margin="20 5 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="210"></ColumnDefinition>
+                    <ColumnDefinition Width="230"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-            <TextBlock Margin="0 5 0 3" FontWeight="DemiBold" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Job Titles"/>
-            <ListBox Name="JobTitlesDiv" BorderBrush="White"  SelectionMode="Single" SelectionChanged="FiltersClickHandler">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Vertical"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="14" Text="{Binding Path=Key}"></TextBlock>
-                            <TextBlock FontSize="14" Text="{Binding Path=Value, StringFormat={} ({0})}"></TextBlock>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                <Button Margin="0 0 15 0" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2" Height="30" Width="125" Content="Add Employee" Foreground="White" BorderBrush="{StaticResource PrimaryColour}" Background="{StaticResource PrimaryColour}" Click="OpenAddEmployeeForm" />
+                <Grid Margin="0 0 15 0" Grid.Row="1" Grid.ColumnSpan="3" ShowGridLines="True">
+                    <Border BorderBrush="#DEDEDE" BorderThickness="1">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <ItemsControl Name="EmployeeCards">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel Margin="10 10 5 10"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" Background="#DFDEDE" Width="205" Height="70" Margin="0 0 10 10">
+                                            <Image Margin="10 0 0 0" Height="{StaticResource UserDPHeight}" Width="{StaticResource UserDPWidth}" Source="/Images/andrew-philips.png"></Image>
+                                            <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 0 0">
+                                                <Button BorderThickness="0" HorizontalAlignment="Left" Click="EditEmployeeDetails" FontSize="13" FontWeight="{StaticResource DemiBold}" Content="{Binding PreferredName}">
 
-            <Button HorizontalAlignment="Left" Foreground="{StaticResource PrimaryColour}" Background="white" BorderBrush="White" Content="view more"></Button>
-        </StackPanel>
-        <Grid Margin="20 5 0 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="210"></ColumnDefinition>
-                <ColumnDefinition Width="230"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            
-            <Button Margin="0 0 15 0" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2" Height="30" Width="125" Content="Add Employee" Foreground="White" BorderBrush="{StaticResource PrimaryColour}" Background="{StaticResource PrimaryColour}" Click="OpenAddEmployeeForm" />
-            <Grid Margin="0 0 15 0" Grid.Row="1" Grid.ColumnSpan="3" ShowGridLines="True">
-                <Border BorderBrush="#DEDEDE" BorderThickness="1">
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                        <ItemsControl Name="EmployeeCards">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Margin="10 10 5 10"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Background="#DFDEDE" Width="205" Height="70" Margin="0 0 10 10">
-                                        <Image Margin="10 0 0 0" Height="{StaticResource UserDPHeight}" Width="{StaticResource UserDPWidth}" Source="/Images/andrew-philips.png"></Image>
-                                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="10 0 0 0">
-                                            <Button BorderThickness="0" HorizontalAlignment="Left" Click="EditEmployeeDetails" FontSize="13" FontWeight="DemiBold" Content="{Binding PreferredName}">
+                                                </Button>
 
-                                            </Button>
-
-                                            <TextBlock Text="{Binding JobTitle}"></TextBlock>
-                                            <TextBlock Text="{Binding Department}"></TextBlock>
-                                            <StackPanel Orientation="Horizontal">
-                                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}"  Icon="Solid_Phone" Width="10" Height="10" HorizontalAlignment="Left" />
-                                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Envelope" Width="10" Height="10" />
-                                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Comment" Width="10" Height="10" HorizontalAlignment="Left" />
-                                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Star" Width="10" Height="10" HorizontalAlignment="Left" />
-                                                <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Heart" Width="10" Height="10" HorizontalAlignment="Left" />
+                                                <TextBlock Text="{Binding JobTitle}"></TextBlock>
+                                                <TextBlock Text="{Binding Department}"></TextBlock>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <fa5:ImageAwesome Margin="{StaticResource IconMargin}"  Icon="Solid_Phone" Width="10" Height="10" HorizontalAlignment="Left" />
+                                                    <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Envelope" Width="10" Height="10" />
+                                                    <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Comment" Width="10" Height="10" HorizontalAlignment="Left" />
+                                                    <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Star" Width="10" Height="10" HorizontalAlignment="Left" />
+                                                    <fa5:ImageAwesome Margin="{StaticResource IconMargin}" Icon="Solid_Heart" Width="10" Height="10" HorizontalAlignment="Left" />
+                                                </StackPanel>
                                             </StackPanel>
                                         </StackPanel>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </Border>
-            </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Border>
+                </Grid>
                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label HorizontalAlignment="Left" FontSize="14" FontWeight="DemiBold" Height="30" Content="Search:"></Label>
                     <TextBox Name="Search" Focusable="True" KeyUp="HandleSearchKeyUp"  Padding="5" Height="30" Width="150" ></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
-                    <Label FontSize="14" FontWeight="DemiBold"  Height="30" Content="Filter By:"></Label>
-                    <ComboBox Name="Filter" Padding="7" Height="30" Width="120" SelectionChanged="FilterSelectionChanged" >
+                    <Label FontSize="14" FontWeight="{StaticResource DemiBold}"  Height="30" Content="Filter By:"></Label>
+                    <ComboBox SelectedValuePath="Content" Name="Filter" Padding="7" Height="30" Width="120" SelectionChanged="FilterSelectionChanged" >
                         <ComboBoxItem IsSelected="True">Name</ComboBoxItem>
                         <ComboBoxItem >Contact Number</ComboBoxItem>
                         <ComboBoxItem >Email</ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
-
-
             </Grid>
-
-    </DockPanel>
-    <views:AddEmployee Visibility="Collapsed" x:Name="addEmpView" HorizontalAlignment="Center" VerticalAlignment="Center"></views:AddEmployee>
-    <views:EditEmployee Visibility="Collapsed" x:Name="EditEmpView" HorizontalAlignment="Center" VerticalAlignment="Center"></views:EditEmployee>
+        </DockPanel>
+        <ContentControl Visibility="Collapsed" Name="UserControlSpace" Width="Auto"></ContentControl>
+        
 
     </StackPanel>
 </UserControl>
