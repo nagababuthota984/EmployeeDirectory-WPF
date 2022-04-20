@@ -7,39 +7,42 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     
-    <Grid HorizontalAlignment="Center">
+    <Grid HorizontalAlignment="Left" Margin="20" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="200"></ColumnDefinition>
             <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="90"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Name="Heading" Margin="0 10 0 20" Foreground="{StaticResource PrimaryColour}" Grid.Row="0" Grid.ColumnSpan="2" FontSize="{StaticResource MainHeadingFontSize}" FontWeight="{StaticResource DemiBold}" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
-        <Separator Margin="0 0 0 10" Grid.ColumnSpan="2" VerticalAlignment="Bottom" />
-        <TextBlock VerticalAlignment="Top" Grid.Row="1" Text="First Name" />
+        <TextBlock Style="{StaticResource FormLabelText}" Name="Heading" Margin="0 10 0 20" Foreground="{StaticResource PrimaryColour}"  Grid.ColumnSpan="3" FontSize="{StaticResource MainHeadingFontSize}" FontWeight="{StaticResource DemiBold}" HorizontalAlignment="Left" VerticalAlignment="Center" ></TextBlock>
+        <Separator Margin="0 0 0 10" Grid.ColumnSpan="3" VerticalAlignment="Bottom" />
+        <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="1" Text="First Name" />
         <TextBox Name="fname" Grid.Row="1"></TextBox>
-        <TextBlock VerticalAlignment="Top" Grid.Row="2" Text="Email " />
-        <TextBox Name="email" IsEnabled="False" Grid.Row="2"></TextBox>
-        <TextBlock VerticalAlignment="Top" Grid.Row="3" Text="Job Title" ></TextBlock>
+        <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="2" Text="Email " />
+        <TextBox  Name="email" IsEnabled="False" Grid.Row="2"></TextBox>
+        <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="3" Text="Job Title" ></TextBlock>
         <TextBox Name="jobtitle" Grid.Row="3"></TextBox>
-        <TextBlock VerticalAlignment="Top" Grid.Row="4" Text="Department" ></TextBlock>
-        <TextBox Name="department" Grid.Row="4"></TextBox>
-        <TextBlock VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Text="Last Name" ></TextBlock>
-        <TextBox Name="lname" Margin="{StaticResource NoMargin}" Grid.Row="1" Grid.Column="1"></TextBox>
-        <TextBlock VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" Text="Date Of Birth" ></TextBlock>
-        <DatePicker Name="dob" Margin="{StaticResource NoMargin}" Height="30" Padding="5" Grid.Row="2" Grid.Column="1"></DatePicker>
-        <TextBlock VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" Text="Salary" ></TextBlock>
-        <TextBox Name="salary" Margin="{StaticResource NoMargin}" Grid.Row="3" Grid.Column="1"></TextBox>
-        <TextBlock VerticalAlignment="Top" Grid.Row="4" Grid.Column="1" Text="Experience in Years" ></TextBlock>
-        <TextBox Name="experience" Margin="{StaticResource NoMargin}" Grid.Row="4" Grid.Column="1"></TextBox>
-        <Button Name="SubmitBtn"  Background="{StaticResource PrimaryColour}" Foreground="Navy" FontWeight="{StaticResource DemiBold}" Grid.Row="5" Height="30" Width="190" Margin="0 0 10 0" ></Button>
-        <Button Name="CancelBtn"  Content="Cancel" Background="Red" Grid.Row="5" Grid.Column="1" FontWeight="{StaticResource DemiBold}" Height="30" Width="190" Margin="0 0 10 0" Click="OnCancel" ></Button>
+        <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Text="Department" ></TextBlock>
+        <TextBox Name="department" Grid.Row="1" Grid.Column="1"></TextBox>
+        <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="2" Grid.Column="1" Text="Last Name" ></TextBlock>
+        <TextBox Name="lname" Grid.Row="2" Grid.Column="1"></TextBox>
+        <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="3" Grid.Column="1" Text="Date Of Birth" ></TextBlock>
+        <DatePicker Name="dob" Margin="0 0 10 0" Height="30" Padding="5" Grid.Row="3" Grid.Column="1"></DatePicker>
+        <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="2" Text="Salary" ></TextBlock>
+        <TextBox Name="salary"  Grid.Row="1" Grid.Column="2"></TextBox>
+        <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="2" Grid.Column="2" Text="Experience in Years" ></TextBlock>
+        <TextBox Name="experience"  Grid.Row="2" Grid.Column="2"></TextBox>
+        <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2" Text="Contact Number" ></TextBlock>
+        <TextBox Name="contactNumber"  Grid.Row="3" Grid.Column="2"></TextBox>
+        
+        <Button Name="SubmitBtn"  Background="{StaticResource PrimaryColour}" Foreground="White" FontWeight="{StaticResource DemiBold}" Grid.Row="5" Grid.Column="1" Height="30" Width="190" Margin="0 0 10 0" ></Button>
+        <Button Name="CancelBtn"  Content="Cancel" Background="Red" Grid.Row="5" Grid.Column="2" FontWeight="{StaticResource DemiBold}" Height="30" Width="190" Margin="0 0 10 0" Click="OnCancel" ></Button>
 
     </Grid>
 </UserControl>

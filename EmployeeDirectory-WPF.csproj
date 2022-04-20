@@ -25,11 +25,17 @@
   <ItemGroup>
     <Resource Include="Images\andrew-philips.png" />
     <Resource Include="Images\saketa-logo.jpg" />
-    <Resource Include="StyleResources.xaml" />
+    <Resource Include="Styles\StyleResources.xaml" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Data\EmployeeData.json">
+    <None Update="Data\Departments.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\Employee.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\JobTitles.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

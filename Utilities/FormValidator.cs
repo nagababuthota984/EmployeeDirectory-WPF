@@ -9,10 +9,10 @@ namespace EmployeeDirectory_WPF.Utilities
 {
     public class FormValidator
     {
-        public static (bool, Employee) IsValidFormData(string firstName, string lastName, string emailId, string jobTitle, string dept, string salary, string experience, DateTime dob)
+        public static (bool, Employee) IsValidFormData(string firstName, string lastName, string emailId, string jobTitle, string dept, string salary, string experience, DateTime dob, string contactNumber)
         {
 
-            long phoneNumber = 8464832529;
+            long phoneNumber;
             int experienceInYears;
             decimal MonthlySalary;
             if (IsValidString(firstName) && IsValidString(lastName) && IsValidString(jobTitle) && IsValidString(dept))
@@ -23,31 +23,37 @@ namespace EmployeeDirectory_WPF.Utilities
                     {
                         if (int.TryParse(experience, out experienceInYears))
                         {
-                            if (DateTime.Today.Year - dob.Year > 20)
+                            if (long.TryParse(contactNumber,out phoneNumber))
                             {
-                                Employee employee = new Employee();
-                                employee.FirstName = firstName;
-                                employee.LastName = lastName;
-                                employee.PreferredName = $"{firstName} {lastName}";
-                                employee.Email = emailId;
-                                employee.JobTitle = jobTitle;
-                                employee.Department = dept;
-                                employee.ExperienceInYears = experienceInYears;
-                                employee.Salary = MonthlySalary;
-                                employee.ContactNumber = phoneNumber;
-                                employee.Dob = dob;
-                                return (true, employee);
+                                if (DateTime.Today.Year - dob.Year > 20)
+                                {
+                                    Employee employee = new Employee();
+                                    employee.FirstName = firstName;
+                                    employee.LastName = lastName;
+                                    employee.PreferredName = $"{firstName} {lastName}";
+                                    employee.Email = emailId;
+                                    employee.JobTitle = jobTitle;
+                                    employee.Department = dept;
+                                    employee.ExperienceInYears = experienceInYears;
+                                    employee.Salary = MonthlySalary;
+                                    employee.ContactNumber = phoneNumber;
+                                    employee.Dob = dob;
+                                    return (true, employee);
+                                }
+                                else
+                                    MessageBox.Show("Invalid DOB");
                             }
                             else
-                            {
-                                MessageBox.Show("Invalid Dob");
-                            }
+                                MessageBox.Show("Invalid phone number");
                         }
-                        MessageBox.Show("Invalid experience. Should enter only digits");
+                        else
+                            MessageBox.Show("Invalid experience. Should enter only digits");
                     }
-                    MessageBox.Show("invalid salary");
+                    else
+                        MessageBox.Show("invalid salary");
                 }
-                MessageBox.Show("invalid Mail");
+                else
+                    MessageBox.Show("invalid Mail");
 
             }
             return (false, null);
