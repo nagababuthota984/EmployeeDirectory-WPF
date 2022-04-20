@@ -1,12 +1,7 @@
 ﻿using EmployeeDirectory_WPF.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static EmployeeDirectory_WPF.Models.Enums;
 
 namespace EmployeeDirectory_WPF.Data
 {

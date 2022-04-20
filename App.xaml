@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:EmployeeDirectory_WPF"
              StartupUri="View/MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="PrimaryColour" Color="#01B0FC"></SolidColorBrush>
     </Application.Resources>
 </Application>

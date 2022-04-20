@@ -66,7 +66,7 @@ namespace EmployeeDirectory_WPF.View
         {
             if (!string.IsNullOrEmpty(textToCompare))
             {
-                return filteredData.Where(emp => (filterCategory.Contains("Name") && emp.PreferredName.Contains(textToCompare, StringComparison.OrdinalIgnoreCase)) || (filterCategory.Contains("Email") && emp.Email.Contains(textToCompare, StringComparison.OrdinalIgnoreCase)) || (filterCategory.Contains("ContactNumber") && emp.ContactNumber.ToString().Equals(textToCompare))).ToList();
+                return filteredData.Where(emp => (filterCategory.Contains("Name") && emp.PreferredName.Contains(textToCompare, StringComparison.OrdinalIgnoreCase)) || (filterCategory.Contains("Email") && emp.Email.Contains(textToCompare, StringComparison.OrdinalIgnoreCase)) || (filterCategory.Contains("ContactNumber") && emp.ContactNumber.ToString().Contains(textToCompare))).ToList();
             }
             else
                 return EmployeeData.Employees;
@@ -79,6 +79,7 @@ namespace EmployeeDirectory_WPF.View
             Main.Visibility = Visibility.Collapsed;
             EmpDetailsView.Heading.Text = "New Employee Details";
             EmpDetailsView.SubmitBtn.Content = "Add Employee";
+            EmpDetailsView.email.IsEnabled = true;
             EmpDetailsView.SubmitBtn.Click += EmpDetailsView.HandleAddEmployee;
             UserControlSpace.Visibility = Visibility.Visible;
             UserControlSpace.Content = EmpDetailsView;

@@ -18,13 +18,13 @@
                 <Setter Property="Foreground" Value="#01B0FC"></Setter>
             </Trigger>
         </Style.Triggers>
+        <Setter Property="FontWeight" Value="DemiBold"></Setter>
     </Style>
     <Style TargetType="TextBox">
         <Setter Property="Margin" Value="0 0 10 0"></Setter>
-        <Setter Property="Padding" Value="3"/>
+        <Setter Property="Padding" Value="5"/>
         <Setter Property="Height" Value="30"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
-
     </Style>
 
 </ResourceDictionary>

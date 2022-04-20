@@ -1,20 +1,17 @@
 ﻿using EmployeeDirectory_WPF.Data;
 using EmployeeDirectory_WPF.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace EmployeeDirectory_WPF.Utilities
 {
     public class FormValidator
     {
-        public static (bool,Employee) IsValidFormData(string firstName,string lastName,string emailId,string jobTitle,string dept,string salary,string experience,DateTime dob)
+        public static (bool, Employee) IsValidFormData(string firstName, string lastName, string emailId, string jobTitle, string dept, string salary, string experience, DateTime dob)
         {
-            
+
             long phoneNumber = 8464832529;
             int experienceInYears;
             decimal MonthlySalary;
@@ -26,7 +23,7 @@ namespace EmployeeDirectory_WPF.Utilities
                     {
                         if (int.TryParse(experience, out experienceInYears))
                         {
-                            if (DateTime.Today.Year - dob.Year >20 )
+                            if (DateTime.Today.Year - dob.Year > 20)
                             {
                                 Employee employee = new Employee();
                                 employee.FirstName = firstName;
@@ -39,7 +36,7 @@ namespace EmployeeDirectory_WPF.Utilities
                                 employee.Salary = MonthlySalary;
                                 employee.ContactNumber = phoneNumber;
                                 employee.Dob = dob;
-                                return (true, employee); 
+                                return (true, employee);
                             }
                             else
                             {
@@ -53,7 +50,7 @@ namespace EmployeeDirectory_WPF.Utilities
                 MessageBox.Show("invalid Mail");
 
             }
-            return (false,null);
+            return (false, null);
         }
         public static bool IsValidEmailFormat(string email)
         {
