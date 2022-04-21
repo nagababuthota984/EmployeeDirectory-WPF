@@ -1,10 +1,8 @@
 ﻿using EmployeeDirectory_WPF.Models;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Windows;
 using static EmployeeDirectory_WPF.Models.Enums;
 
 namespace EmployeeDirectory_WPF.Data
@@ -16,13 +14,10 @@ namespace EmployeeDirectory_WPF.Data
         public static void WriteToJson<T>()
         {
             string data;
-            string type = typeof(T).ToString();
-            
-
             if (typeof(T) == typeof(Employee))
             {
-                data = JsonConvert.SerializeObject(typeof(EmployeeData).GetProperty(typeof(T).ToString()), Formatting.Indented);
-                File.WriteAllText($"{projectDirectory}\\Data\\{typeof(T)}.json", data);
+                data = JsonConvert.SerializeObject(EmployeeData.Employees, Formatting.Indented);
+                File.WriteAllText($"{projectDirectory}\\Data\\Employee.json", data);
             }
             else if(typeof(T) == typeof(GeneralFilter))
             {
@@ -31,20 +26,17 @@ namespace EmployeeDirectory_WPF.Data
                 lst.AddRange(EmployeeData.Departments);
                 data = JsonConvert.SerializeObject(lst,Formatting.Indented);
                 File.WriteAllText($"{projectDirectory}\\Data\\GeneralFilters.json", data);
-
             }
         }
         public static string ReadFromJson(string typeOfData)
         {
             return File.ReadAllText($"{projectDirectory}\\Data\\{typeOfData}.json");
-
         }
         public static void InitEmployeeData()
         {
             string data = ReadFromJson("Employee");
             if (!string.IsNullOrEmpty(data))
-                EmployeeData.Employees = JsonConvert.DeserializeObject<List<Employee>>(data);
-            
+                EmployeeData.Employees = JsonConvert.DeserializeObject<List<Employee>>(data).Where(emp=> emp.Status==Status.Existing).ToList();
         }
         public static void InitGeneralFiltersData()
         {

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using static EmployeeDirectory_WPF.Models.Enums;
-
 namespace EmployeeDirectory_WPF.Models
 {
     public class GeneralFilter :INotifyPropertyChanged
@@ -26,7 +25,6 @@ namespace EmployeeDirectory_WPF.Models
             set { _category = value; OnPropertyChange("Category"); }
 
         }
-
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChange(string property)
         {

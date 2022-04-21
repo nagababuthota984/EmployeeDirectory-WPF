@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <Page Remove="StyleResources.xaml" />
-    <Page Remove="Styles\StyleResources.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,7 +25,13 @@
   <ItemGroup>
     <Resource Include="Images\andrew-philips.png" />
     <Resource Include="Images\saketa-logo.jpg" />
-    <Resource Include="Styles\StyleResources.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Styles\StyleResources.xaml">
+      <CustomToolNamespace></CustomToolNamespace>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
 </Project>

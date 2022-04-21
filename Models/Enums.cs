@@ -27,6 +27,11 @@
             Female,
             Nonbinary
         }
+        public enum Status
+        {
+            Existing,
+            Resigned
+        }
         
     }
 }

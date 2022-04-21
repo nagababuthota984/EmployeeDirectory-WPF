@@ -12,6 +12,7 @@ namespace EmployeeDirectory_WPF.Models
         public string Email { get; set; }
         public DateTime Dob { get; set; }
         public Gender Gender { get; set; }
+        public Status Status { get; set; }
         public string JobTitle { get; set; }
         public string Department { get; set; }
         public int ExperienceInYears { get; set; }
@@ -34,6 +35,7 @@ namespace EmployeeDirectory_WPF.Models
             this.Salary = salary;
             this.ContactNumber = phoneNumber;
             this.EmploymentType = empType;
+            this.Status = Status.Existing;
         }
         public Employee()
         {

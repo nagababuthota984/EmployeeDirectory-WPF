@@ -14,11 +14,11 @@ namespace EmployeeDirectory_WPF.Converters
                 if (decimal.TryParse(value.ToString(), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var range))
                 {
                     if (range < 20000)
-                        return "below20000";
+                        return 1;
                     else if (range < 40000)
-                        return "below40000";
+                        return 2;
                     else if (range > 40000)
-                        return "above40000";
+                        return 3;
                 }
             }
             return null;
@@ -33,6 +33,5 @@ namespace EmployeeDirectory_WPF.Converters
         {
             return this;
         }
-
     }
 }

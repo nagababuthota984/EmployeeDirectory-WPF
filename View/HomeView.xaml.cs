@@ -61,9 +61,7 @@ namespace EmployeeDirectory_WPF.View
             var tb = sender as TextBox;
             var filterCategory = Filter.Text;
             if (tb != null)
-            {
                 EmployeeCards.ItemsSource = GetSearchFilteredData(tb.Text, filterCategory);
-            }
         }
         private List<Employee> GetSearchFilteredData(string textToCompare, string filterCategory)
         {
@@ -74,7 +72,6 @@ namespace EmployeeDirectory_WPF.View
             else
                 return EmployeeData.Employees;
         }
-
         private void OpenAddEmployeeForm(object sender, RoutedEventArgs e)
         {
             Main.Visibility = Visibility.Collapsed;
@@ -85,10 +82,8 @@ namespace EmployeeDirectory_WPF.View
             UserControlSpace.Visibility = Visibility.Visible;
             UserControlSpace.Content = EmpDetailsView;
         }
-
         private void EditEmployeeDetails(object sender, RoutedEventArgs e)
         {
-
             Main.Visibility = Visibility.Collapsed;
             SelectedEmployee = (Employee)EmployeeCards.SelectedItem;
             EmpDetailsView.LoadFormContent(SelectedEmployee);
@@ -97,10 +92,7 @@ namespace EmployeeDirectory_WPF.View
             EmpDetailsView.SubmitBtn.Click += EmpDetailsView.UpdateEmployeeDetails;
             UserControlSpace.Visibility = Visibility.Visible;
             UserControlSpace.Content = EmpDetailsView;
-
         }
-
-
         private void FilterSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0 && e.AddedItems[0].ToString().Split(":").Length > 1)
@@ -108,15 +100,16 @@ namespace EmployeeDirectory_WPF.View
                 EmployeeCards.ItemsSource = GetSearchFilteredData(Search.Text, e.AddedItems[0].ToString().Split(":")[1].Trim());
             }
         }
-
         private void DeleteEmployee(object sender, RoutedEventArgs e)
         {
             SelectedEmployee = (Employee)EmployeeCards.SelectedItem;
-            if(MessageBoxResult.Yes == MessageBox.Show($"Are you sure you want to delete {SelectedEmployee.PreferredName}", "Delete Employee?", MessageBoxButton.YesNo))
+            if (MessageBoxResult.Yes == MessageBox.Show($"Are you sure you want to delete {SelectedEmployee.PreferredName}", "Delete Employee?", MessageBoxButton.YesNo))
             {
                 //delete the employee here
+                Employee emp = EmployeeData.Employees.FirstOrDefault(emp => emp.Email.Equals(SelectedEmployee.Email, StringComparison.OrdinalIgnoreCase));
+                emp.Status = Status.Resigned;
+                JsonHelper.WriteToJson<Employee>();
             }
-            
         }
     }
 }
