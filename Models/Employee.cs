@@ -6,6 +6,7 @@ namespace EmployeeDirectory_WPF.Models
     public class Employee
     {
         #region Properties
+        public string EmployeeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PreferredName { get; set; }
@@ -22,6 +23,7 @@ namespace EmployeeDirectory_WPF.Models
 
         public Employee(string firstName, string lastName, string email, DateTime dob, string jobtitle, string department, int experienceInYears,long phoneNumber,decimal salary,EmployementType empType)
         {
+            this.EmployeeId = $"{firstName}{dob.Year}{DateTime.Now.Millisecond}";
             this.FirstName = firstName;
             this.LastName = lastName;
             this.PreferredName = $"{firstName} {lastName}";

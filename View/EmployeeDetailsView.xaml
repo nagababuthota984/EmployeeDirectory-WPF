@@ -42,7 +42,7 @@
         <TextBox Name="contactNumber"  Grid.Row="3" Grid.Column="2"></TextBox>
         
         <Button Name="SubmitBtn"  Background="{StaticResource PrimaryColour}" Foreground="White" FontWeight="{StaticResource DemiBold}" Grid.Row="5" Grid.Column="1" Height="30" Width="190" Margin="0 0 10 0" ></Button>
-        <Button Name="CancelBtn"  Content="Cancel" Background="Red" Grid.Row="5" Grid.Column="2" FontWeight="{StaticResource DemiBold}" Height="30" Width="190" Margin="0 0 10 0" Click="OnCancel" ></Button>
+        <Button Name="CancelBtn"  Content="Cancel" Background="OrangeRed" Foreground="White" Grid.Row="5" Grid.Column="2" FontWeight="{StaticResource DemiBold}" Height="30" Width="190" Margin="0 0 10 0" Click="OnCancel" ></Button>
 
     </Grid>
 </UserControl>
