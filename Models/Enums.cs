@@ -21,6 +21,12 @@
             Department,
             JobTitle
         }
+        public enum Gender
+        {
+            Male,
+            Female,
+            Nonbinary
+        }
         
     }
 }

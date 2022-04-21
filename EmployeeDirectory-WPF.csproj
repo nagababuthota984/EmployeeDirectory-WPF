@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Page Remove="StyleResources.xaml" />
+    <Page Remove="Styles\StyleResources.xaml" />
   </ItemGroup>
 
   <ItemGroup>

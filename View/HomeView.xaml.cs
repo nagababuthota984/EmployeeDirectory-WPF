@@ -86,8 +86,9 @@ namespace EmployeeDirectory_WPF.View
             UserControlSpace.Content = EmpDetailsView;
         }
 
-        private void EditEmployeeDetails(object sender, SelectionChangedEventArgs e)
+        private void EditEmployeeDetails(object sender, RoutedEventArgs e)
         {
+
             Main.Visibility = Visibility.Collapsed;
             SelectedEmployee = (Employee)EmployeeCards.SelectedItem;
             EmpDetailsView.LoadFormContent(SelectedEmployee);
@@ -108,6 +109,14 @@ namespace EmployeeDirectory_WPF.View
             }
         }
 
-
+        private void DeleteEmployee(object sender, RoutedEventArgs e)
+        {
+            SelectedEmployee = (Employee)EmployeeCards.SelectedItem;
+            if(MessageBoxResult.Yes == MessageBox.Show($"Are you sure you want to delete {SelectedEmployee.PreferredName}", "Delete Employee?", MessageBoxButton.YesNo))
+            {
+                //delete the employee here
+            }
+            
+        }
     }
 }

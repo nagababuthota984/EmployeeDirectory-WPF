@@ -15,10 +15,10 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="90"></RowDefinition>
-            <RowDefinition Height="65"></RowDefinition>
-            <RowDefinition Height="65"></RowDefinition>
-            <RowDefinition Height="65"></RowDefinition>
-            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="68"></RowDefinition>
+            <RowDefinition Height="68"></RowDefinition>
+            <RowDefinition Height="68"></RowDefinition>
+            <RowDefinition Height="68"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Style="{StaticResource FormLabelText}" Name="Heading" Margin="0 10 0 20" Foreground="{StaticResource PrimaryColour}"  Grid.ColumnSpan="3" FontSize="{StaticResource MainHeadingFontSize}" FontWeight="{StaticResource DemiBold}" HorizontalAlignment="Left" VerticalAlignment="Center" ></TextBlock>
         <Separator Margin="0 0 0 10" Grid.ColumnSpan="3" VerticalAlignment="Bottom" />
@@ -37,7 +37,7 @@
         <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="1" Grid.Column="2" Text="Salary" ></TextBlock>
         <TextBox Name="salary"  Grid.Row="1" Grid.Column="2"></TextBox>
         <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="2" Grid.Column="2" Text="Experience in Years" ></TextBlock>
-        <TextBox Name="experience"  Grid.Row="2" Grid.Column="2"></TextBox>
+        <TextBox  Name="experience"  Grid.Row="2" Grid.Column="2"></TextBox>
         <TextBlock Style="{StaticResource FormLabelText}" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2" Text="Contact Number" ></TextBlock>
         <TextBox Name="contactNumber"  Grid.Row="3" Grid.Column="2"></TextBox>
 

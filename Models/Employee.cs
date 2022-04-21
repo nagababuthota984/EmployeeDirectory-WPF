@@ -11,6 +11,7 @@ namespace EmployeeDirectory_WPF.Models
         public string PreferredName { get; set; }
         public string Email { get; set; }
         public DateTime Dob { get; set; }
+        public Gender Gender { get; set; }
         public string JobTitle { get; set; }
         public string Department { get; set; }
         public int ExperienceInYears { get; set; }
