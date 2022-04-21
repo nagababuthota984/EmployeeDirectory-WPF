@@ -7,8 +7,9 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using static EmployeeDirectory_WPF.Models.Enums;
 
-
+using EmployeeDirectory_WPF.Converters;
 namespace EmployeeDirectory_WPF.View
 {
     /// <summary>
@@ -26,32 +27,34 @@ namespace EmployeeDirectory_WPF.View
             EmployeeCards.ItemsSource = filteredData;
             DepartmentsDiv.ItemsSource = EmployeeData.Departments;
             JobTitlesDiv.ItemsSource = EmployeeData.JobTitles;
+            Filter.ItemsSource = Enum.GetNames(typeof(FilterCategories));
+            Filter.SelectedValue = Filter.Items[0];
             EmpDetailsView = new EmployeeDetailsView();
             SelectedEmployee = new Employee();
+            JsonHelper.WriteToJson<GeneralFilter>();
 
         }
         public void FiltersClickHandler(object sender, SelectionChangedEventArgs e)
         {
             var lbox = sender as ListBox;
-            if (lbox.SelectedItem.ToString() != null)
+            if (lbox.Name.Equals("DepartmentsDiv"))
             {
-                string filterValue = lbox.SelectedItem.ToString().Replace('[', ',').Split(',')[1];
-                string filterName = lbox.Name;
-                if (filterName.Equals("DepartmentsDiv", StringComparison.OrdinalIgnoreCase))
-                    EmployeeCards.ItemsSource = GetEmployeesByDept(filterValue);
-                else
-                    EmployeeCards.ItemsSource = GetEmployeesByJobTitle(filterValue);
+                var dept = (GeneralFilter)lbox.SelectedItem;
+                EmployeeCards.ItemsSource = GetEmployeesByDept(dept.Name);
+            }
+            else
+            {
+                var jobTitle = (GeneralFilter)lbox.SelectedItem;
+                EmployeeCards.ItemsSource = GetEmployeesByJobTitle(jobTitle.Name);
             }
         }
         private IEnumerable GetEmployeesByJobTitle(string filterValue)
         {
-            filteredData = EmployeeData.Employees.Where(emp => emp.JobTitle.Equals(filterValue, StringComparison.OrdinalIgnoreCase)).ToList(); ;
-            return filteredData;
+            return filteredData = EmployeeData.Employees.Where(emp => emp.JobTitle.Equals(filterValue, StringComparison.OrdinalIgnoreCase)).ToList(); ;
         }
         private List<Employee> GetEmployeesByDept(string filterValue)
         {
-            filteredData = EmployeeData.Employees.Where(emp => emp.Department.Equals(filterValue, StringComparison.OrdinalIgnoreCase)).ToList();
-            return filteredData;
+            return filteredData = EmployeeData.Employees.Where(emp => emp.Department.Equals(filterValue, StringComparison.OrdinalIgnoreCase)).ToList();
         }
         private void HandleSearchKeyUp(object sender, KeyEventArgs e)
         {
@@ -70,8 +73,6 @@ namespace EmployeeDirectory_WPF.View
             }
             else
                 return EmployeeData.Employees;
-
-
         }
 
         private void OpenAddEmployeeForm(object sender, RoutedEventArgs e)
@@ -85,21 +86,10 @@ namespace EmployeeDirectory_WPF.View
             UserControlSpace.Content = EmpDetailsView;
         }
 
-        private void EditEmployeeDetails(object sender, RoutedEventArgs e)
+        private void EditEmployeeDetails(object sender, SelectionChangedEventArgs e)
         {
             Main.Visibility = Visibility.Collapsed;
-            var btn = sender as Button;
-            if (btn != null)
-            {
-
-                var tb = (TextBlock)btn.Content;
-                
-                
-                if (!string.IsNullOrWhiteSpace(tb.Text) )
-                {
-                    SelectedEmployee = GetEmployeeByName(tb.Text);
-                }
-            }
+            SelectedEmployee = (Employee)EmployeeCards.SelectedItem;
             EmpDetailsView.LoadFormContent(SelectedEmployee);
             EmpDetailsView.Heading.Text = "Edit Employee Details";
             EmpDetailsView.SubmitBtn.Content = "Update Details";
@@ -109,10 +99,7 @@ namespace EmployeeDirectory_WPF.View
 
         }
 
-        private Employee GetEmployeeByName(string preferredName)
-        {
-            return EmployeeData.Employees.FirstOrDefault(emp => emp.PreferredName.Equals(preferredName, StringComparison.OrdinalIgnoreCase));
-        }
+
         private void FilterSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0 && e.AddedItems[0].ToString().Split(":").Length > 1)
@@ -120,5 +107,7 @@ namespace EmployeeDirectory_WPF.View
                 EmployeeCards.ItemsSource = GetSearchFilteredData(Search.Text, e.AddedItems[0].ToString().Split(":")[1].Trim());
             }
         }
+
+
     }
 }

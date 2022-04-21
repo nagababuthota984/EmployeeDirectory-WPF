@@ -3,21 +3,15 @@
              xmlns:fa5="http://schemas.fontawesome.com/icons/"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:converters="clr-namespace:EmployeeDirectory_WPF.Converters"
              mc:Ignorable="d" 
              >
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../StyleResources.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-            
-        </ResourceDictionary>
-    </UserControl.Resources>
-    
+
+
     <Grid>
         <!--avoid dock panel in most of the cases-->
-        <DockPanel x:Name="Main" >   
+        <DockPanel x:Name="Main" >
             <Grid  Margin="0 20 0 0"  DockPanel.Dock="Top" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -59,8 +53,8 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="14" Text="{Binding Path=Key}"></TextBlock>
-                                <TextBlock FontSize="14" Text="{Binding Path=Value,StringFormat={} ({0})}"></TextBlock>
+                                <TextBlock FontSize="14" Text="{Binding Path=Name}"></TextBlock>
+                                <TextBlock FontSize="14" Text="{Binding Path=Count,StringFormat={} ({0})}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -77,8 +71,8 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="14" Text="{Binding Path=Key}"></TextBlock>
-                                <TextBlock FontSize="14" Text="{Binding Path=Value, StringFormat={} ({0})}"></TextBlock>
+                                <TextBlock FontSize="14" Text="{Binding Path=Name}"></TextBlock>
+                                <TextBlock FontSize="14" Text="{Binding Path=Count, StringFormat={} ({0})}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -99,23 +93,30 @@
 
                 <Button Margin="0 0 15 0" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="2" Height="30" Width="125" Content="Add Employee" Foreground="White" BorderBrush="{StaticResource PrimaryColour}" Background="{StaticResource PrimaryColour}" Click="OpenAddEmployeeForm" />
                 <Grid Margin="0 0 15 0" Grid.Row="1" Grid.ColumnSpan="3" ShowGridLines="True">
-                    <DataGrid  ColumnHeaderStyle="{StaticResource ColumnHeaderStyle1}" IsReadOnly="True"  Name="EmployeeCards" ColumnWidth="*" AutoGenerateColumns="False" RowHeight="30" HorizontalGridLinesBrush="PaleTurquoise" VerticalGridLinesBrush="PaleTurquoise" HeadersVisibility="Column" >
+                    <DataGrid SelectionChanged="EditEmployeeDetails" CellStyle="{StaticResource DataGridCellStyle}" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle1}" IsReadOnly="True"  Name="EmployeeCards" ColumnWidth="*" AutoGenerateColumns="False" RowHeight="30" HorizontalGridLinesBrush="PaleTurquoise" VerticalGridLinesBrush="PaleTurquoise" HeadersVisibility="Column" >
                         <DataGrid.Columns >
 
-                            <DataGridTextColumn Header="Name" Binding="{Binding Path=FirstName}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Name">
+                                <DataGridTextColumn.Binding>
+                                    <MultiBinding StringFormat="{}{0} {1}">
+                                        <Binding Path="FirstName"/>
+                                        <Binding Path="LastName"/>
+                                    </MultiBinding>
+                                </DataGridTextColumn.Binding>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Age" Binding="{Binding Path=Dob}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="JobTitle" Binding="{Binding Path=JobTitle}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Department" Binding="{Binding Path=Department}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Experience" Binding="{Binding Path=ExperienceInYears}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Contact" Binding="{Binding Path=ContactNumber}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="Salary" Binding="{Binding Path=Salary}"></DataGridTextColumn>
+                            <DataGridTextColumn Header="Age" Binding="{Binding Path=Dob, Converter={converters:DobToAgeConverter}}"/>
+                            <DataGridTextColumn Header="JobTitle" Binding="{Binding Path=JobTitle}"/>
+                            <DataGridTextColumn Header="Department" Binding="{Binding Path=Department}"/>
+                            <DataGridTextColumn Header="Experience" Binding="{Binding Path=ExperienceInYears}"/>
+                            <DataGridTextColumn Header="Contact" Binding="{Binding Path=ContactNumber}"/>
+                            <DataGridTextColumn Header="Salary" Binding="{Binding Path=Salary}"/>
 
 
 
                         </DataGrid.Columns>
-                    
-                    </DataGrid>     
+                        
+                    </DataGrid>
                 </Grid>
                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label HorizontalAlignment="Left" FontSize="14" FontWeight="{StaticResource DemiBold}" Height="30" Content="Search:"></Label>
@@ -123,16 +124,13 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
                     <Label FontSize="14" FontWeight="{StaticResource DemiBold}"  Height="30" Content="Filter By:"></Label>
-                    <ComboBox  SelectedValuePath="Content" Name="Filter" Padding="7" Height="30" Width="120" SelectionChanged="FilterSelectionChanged" >
-                        <ComboBoxItem IsSelected="True" Content="Name"></ComboBoxItem>
-                        <ComboBoxItem Content="ContactNumber"></ComboBoxItem>
-                        <ComboBoxItem Content="Email"></ComboBoxItem>
+                    <ComboBox  Name="Filter" Padding="7" Height="30" Width="160" SelectionChanged="FilterSelectionChanged" >
                     </ComboBox>
                 </StackPanel>
             </Grid>
         </DockPanel>
         <ContentControl Visibility="Collapsed" Name="UserControlSpace" Width="Auto"></ContentControl>
-        
+
 
     </Grid>
 </UserControl>

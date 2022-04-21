@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using static EmployeeDirectory_WPF.Models.Enums;
 
 namespace EmployeeDirectory_WPF.View
 {
@@ -34,6 +35,7 @@ namespace EmployeeDirectory_WPF.View
                 dob.SelectedDate = emp.Dob;
                 salary.Text = emp.Salary.ToString();
                 experience.Text = emp.ExperienceInYears.ToString();
+                contactNumber.Text = emp.ContactNumber.ToString();
             }
         }
         public void UpdateEmployeeDetails(object sender, RoutedEventArgs e)
@@ -43,8 +45,10 @@ namespace EmployeeDirectory_WPF.View
             {
                 EmployeeData.Employees.Remove(EmployeeData.Employees.FirstOrDefault(emp => emp.Email.Equals(tpl.Item2.Email, StringComparison.OrdinalIgnoreCase)));
                 EmployeeData.Employees.Add(tpl.Item2);
-                EmployeeData.WriteToJson("Employee");
-                MessageBox.Show("Updated Successfully");
+                JsonHelper.WriteToJson<Employee>();
+                JsonHelper.WriteToJson<GeneralFilter>();
+                MessageBox.Show("Updated Successfully"); 
+                Application.Current.MainWindow.Content = new HomeView();
             }
         }
         public void HandleAddEmployee(object sender, RoutedEventArgs e)
@@ -62,22 +66,22 @@ namespace EmployeeDirectory_WPF.View
         {
             if (!string.IsNullOrEmpty(jobTitle))
             {
-                KeyValuePair<string, int> job = EmployeeData.JobTitles.FirstOrDefault(jt => jt.Key.Equals(jobTitle, StringComparison.OrdinalIgnoreCase));
-                if (job.Key != null)
-                    EmployeeData.JobTitles[job.Key] += 1;
+                GeneralFilter job = EmployeeData.JobTitles.FirstOrDefault(jt => (jt.Category==GeneralFilterCategories.JobTitle && jt.Name.Equals(jobTitle, StringComparison.OrdinalIgnoreCase)));
+                if (job != null)
+                    job.Count += 1;
                 else
-                    EmployeeData.JobTitles.Add(jobTitle, 1);
+                    EmployeeData.JobTitles.Add(new GeneralFilter { Name = jobTitle, Count = 1,Category=GeneralFilterCategories.JobTitle });
             }
         }
         private void AddDepartment(string department)
         {
             if (!string.IsNullOrEmpty(department))
             {
-                KeyValuePair<string, int> job = EmployeeData.Departments.FirstOrDefault(jt => jt.Key.Equals(department, StringComparison.OrdinalIgnoreCase));
-                if (job.Key != null)
-                    EmployeeData.Departments[job.Key] += 1;
+                GeneralFilter dept = EmployeeData.Departments.FirstOrDefault(jt => jt.Name.Equals(department, StringComparison.OrdinalIgnoreCase));
+                if (dept != null)
+                    dept.Count += 1;
                 else
-                    EmployeeData.Departments.Add(department, 1);
+                    EmployeeData.Departments.Add(new GeneralFilter { Name = department, Count = 1,Category=GeneralFilterCategories.Department });
             }
         }
     }

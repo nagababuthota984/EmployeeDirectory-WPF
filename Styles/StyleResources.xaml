@@ -12,14 +12,7 @@
     <Thickness x:Key="IconMargin">0 3 6 3</Thickness>
     <Thickness x:Key="NoMargin">0</Thickness>
     <FontWeight x:Key="DemiBold">DemiBold</FontWeight>
-    <Style TargetType="TextBlock">
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Foreground" Value="#01B0FC"></Setter>
-            </Trigger>
-        </Style.Triggers>
-        <Setter Property="FontWeight" Value="DemiBold"></Setter>
-    </Style>
+    
     <Style TargetType="TextBox">
         <Setter Property="Margin" Value="0 0 10 0"></Setter>
         <Setter Property="Padding" Value="5"/>
@@ -34,5 +27,17 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="DemiBold"></Setter>
         
+    </Style>
+    <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
+        <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Department}" Value="IT Department">
+                <Setter Property="Background" Value="AntiqueWhite"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style x:Key="FormLabelText" TargetType="TextBlock">
+        <Setter Property="Margin" Value="3"></Setter>
+        <Setter Property="FontWeight" Value="DemiBold"></Setter>
     </Style>
 </ResourceDictionary>

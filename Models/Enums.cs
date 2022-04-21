@@ -7,6 +7,20 @@
             Contract,
             Permanent
         }
+        public enum FilterCategories
+        {
+            Name,
+            ContactNumber,
+            Salary,
+            Experience,
+            SkypeId,
+            Age
+        }
+        public enum GeneralFilterCategories
+        {
+            Department,
+            JobTitle
+        }
         
     }
 }

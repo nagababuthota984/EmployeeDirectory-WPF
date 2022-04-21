@@ -12,7 +12,8 @@ namespace EmployeeDirectory_WPF
         public MainWindow()
         {
             InitializeComponent();
-            EmployeeData.LoadDataFromJson();
+            JsonHelper.InitGeneralFiltersData();
+            JsonHelper.InitEmployeeData();
             MainContent.Content = new HomeView();
 
         }
