@@ -31,13 +31,11 @@ namespace EmployeeDirectory_WPF.View
             Filter.SelectedValue = Filter.Items[0];
             EmpDetailsView = new EmployeeDetailsView();
             SelectedEmployee = new Employee();
-            JsonHelper.WriteToJson<GeneralFilter>();
-
         }
         public void FiltersClickHandler(object sender, SelectionChangedEventArgs e)
         {
             var lbox = sender as ListBox;
-            if (lbox.Name.Equals("DepartmentsDiv"))
+            if (lbox.Name.Equals("DepartmentsDiv",StringComparison.OrdinalIgnoreCase))
             {
                 var dept = (GeneralFilter)lbox.SelectedItem;
                 EmployeeCards.ItemsSource = GetEmployeesByDept(dept.Name);
@@ -59,16 +57,13 @@ namespace EmployeeDirectory_WPF.View
         private void HandleSearchKeyUp(object sender, KeyEventArgs e)
         {
             var tb = sender as TextBox;
-            var filterCategory = Filter.Text;
             if (tb != null)
-                EmployeeCards.ItemsSource = GetSearchFilteredData(tb.Text, filterCategory);
+                EmployeeCards.ItemsSource = GetSearchFilteredData(tb.Text, Filter.Text);
         }
         private List<Employee> GetSearchFilteredData(string textToCompare, string filterCategory)
         {
-            if (!string.IsNullOrEmpty(textToCompare))
-            {
+            if (!string.IsNullOrWhiteSpace(textToCompare))
                 return filteredData.Where(emp => (filterCategory.Contains("Name") && emp.PreferredName.Contains(textToCompare, StringComparison.OrdinalIgnoreCase)) || (filterCategory.Contains("Email") && emp.Email.Contains(textToCompare, StringComparison.OrdinalIgnoreCase)) || (filterCategory.Contains("ContactNumber") && emp.ContactNumber.ToString().Contains(textToCompare))).ToList();
-            }
             else
                 return EmployeeData.Employees;
         }
@@ -78,7 +73,7 @@ namespace EmployeeDirectory_WPF.View
             EmpDetailsView.Heading.Text = "New Employee Details";
             EmpDetailsView.SubmitBtn.Content = "Add Employee";
             EmpDetailsView.email.IsEnabled = true;
-            EmpDetailsView.SubmitBtn.Click += EmpDetailsView.HandleAddEmployee;
+            EmpDetailsView.SubmitBtn.Click += EmpDetailsView.HandleAddEmployee;  //disposal?
             UserControlSpace.Visibility = Visibility.Visible;
             UserControlSpace.Content = EmpDetailsView;
         }
@@ -86,7 +81,7 @@ namespace EmployeeDirectory_WPF.View
         {
             Main.Visibility = Visibility.Collapsed;
             SelectedEmployee = (Employee)EmployeeCards.SelectedItem;
-            EmpDetailsView.LoadFormContent(SelectedEmployee);
+            EmpDetailsView.LoadContentIntoForm(SelectedEmployee);
             EmpDetailsView.Heading.Text = "Edit Employee Details";
             EmpDetailsView.SubmitBtn.Content = "Update Details";
             EmpDetailsView.SubmitBtn.Click += EmpDetailsView.UpdateEmployeeDetails;
@@ -108,6 +103,10 @@ namespace EmployeeDirectory_WPF.View
                 //delete the employee here
                 Employee emp = EmployeeData.Employees.FirstOrDefault(emp => emp.Email.Equals(SelectedEmployee.Email, StringComparison.OrdinalIgnoreCase));
                 emp.Status = Status.Resigned;
+                GeneralFilter job =EmployeeData.JobTitles.FirstOrDefault(j => j.Name.Equals(emp.JobTitle, StringComparison.OrdinalIgnoreCase));
+                job.Count -= 1;
+                GeneralFilter dept = EmployeeData.Departments.FirstOrDefault(j => j.Name.Equals(emp.Department, StringComparison.OrdinalIgnoreCase));
+                dept.Count -= 1;
                 JsonHelper.WriteToJson<Employee>();
             }
         }

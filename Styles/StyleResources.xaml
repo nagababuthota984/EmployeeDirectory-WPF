@@ -18,6 +18,12 @@
         <Setter Property="Height" Value="30"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
     </Style>
+    <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
+        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+        <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+        <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+        <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+    </Style>
     <Style x:Key="ColumnsHeaderStyle" TargetType="DataGridColumnHeader">
         <Setter Property="Height" Value="30"/>
         <Setter Property="Background" Value="{StaticResource PrimaryColour}"/>
@@ -27,30 +33,22 @@
         <Setter Property="FontWeight" Value="DemiBold"></Setter>
 
     </Style>
-    <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
-        <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-        <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
-        <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-        <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
-    </Style>
+
     <Style x:Key="FormLabelText" TargetType="TextBlock">
         <Setter Property="Padding" Value="0 0 0 4"></Setter>
         <Setter Property="FontWeight" Value="DemiBold"></Setter>
     </Style>
+
     
-    <Style x:Key="SalaryCellStyle" TargetType="DataGridCell"   BasedOn="{StaticResource DataGridCellStyle}">
+    <!--<Style x:Key="JobTitleCellStyle" TargetType="DataGridRow">
         <Style.Triggers>
-            <DataTrigger  Binding="{Binding Path=Salary, Converter={converters:SalaryRangeConverter}}" Value="1">
-                <Setter Property="Foreground" Value="Red"></Setter>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Path=Salary, Converter={converters:SalaryRangeConverter}}" Value="2">
-                <Setter Property="Foreground" Value="Blue"></Setter>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding Path=Salary, Converter={converters:SalaryRangeConverter}}" Value="3">
-                <Setter Property="Foreground" Value="ForestGreen"></Setter>
+            <DataTrigger Binding="{Binding Path=JobTitle, Converter={StaticResource JobTitleToColorConverter}}">
+                
+                
             </DataTrigger>
         </Style.Triggers>
-    </Style>
+    </Style>-->
+    
     <Style x:Key="GenderCellStyle" TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle}">
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=Gender}" Value="Male">
@@ -61,6 +59,8 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+
+
     <Style x:Key="EditDeleteBtnStyle" TargetType="Button">
         <Setter Property="FontWeight" Value="DemiBold"></Setter>
         <Setter Property="BorderBrush" Value="White"/>

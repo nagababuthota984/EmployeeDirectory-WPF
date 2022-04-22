@@ -15,15 +15,17 @@ namespace EmployeeDirectory_WPF.View
     /// </summary>
     public partial class EmployeeDetailsView : UserControl
     {
+        public Employee currentEmployee;
         public EmployeeDetailsView()
         {
             InitializeComponent();
+            currentEmployee = new Employee();
         }
         private void OnCancel(object sender, RoutedEventArgs e)
         {
             Application.Current.MainWindow.Content = new HomeView();
         }
-        public void LoadFormContent(Employee emp)
+        public void LoadContentIntoForm(Employee emp)
         {
             if (emp != null)
             {
@@ -36,41 +38,61 @@ namespace EmployeeDirectory_WPF.View
                 salary.Text = emp.Salary.ToString();
                 experience.Text = emp.ExperienceInYears.ToString();
                 contactNumber.Text = emp.ContactNumber.ToString();
+                currentEmployee = emp;
             }
+        }
+        public Employee ConvertFormContentToEmployee()
+        {
+            if (int.TryParse(experience.Text, out int exp) && decimal.TryParse(salary.Text, out decimal sal) && long.TryParse(contactNumber.Text, out long phone))
+            {
+                currentEmployee.FirstName = fname.Text;
+                currentEmployee.LastName = lname.Text;
+                currentEmployee.Email = email.Text;
+                currentEmployee.JobTitle = jobtitle.Text;
+                currentEmployee.Department = department.Text;
+                currentEmployee.ExperienceInYears = exp;
+                currentEmployee.Salary = sal;
+                currentEmployee.ContactNumber = phone;
+                return currentEmployee;
+            }
+            return null;
+
         }
         public void UpdateEmployeeDetails(object sender, RoutedEventArgs e)
         {
-            (bool, Employee) tpl = FormValidator.IsValidFormData(fname.Text, lname.Text, email.Text, jobtitle.Text, department.Text, salary.Text, experience.Text, (DateTime)dob.SelectedDate);
-            if (tpl.Item1 && tpl.Item2 != null)
+            currentEmployee = ConvertFormContentToEmployee();
+            if (FormValidator.IsValidFormData(currentEmployee))
             {
-                EmployeeData.Employees.Remove(EmployeeData.Employees.FirstOrDefault(emp => emp.Email.Equals(tpl.Item2.Email, StringComparison.OrdinalIgnoreCase)));
-                EmployeeData.Employees.Add(tpl.Item2);
+                EmployeeData.Employees.Remove(EmployeeData.Employees.FirstOrDefault(emp => emp.Email.Equals(currentEmployee.Email, StringComparison.OrdinalIgnoreCase)));
+                EmployeeData.Employees.Add(currentEmployee);
                 JsonHelper.WriteToJson<Employee>();
                 JsonHelper.WriteToJson<GeneralFilter>();
-                MessageBox.Show("Updated Successfully"); 
+                MessageBox.Show("Updated Successfully");
                 Application.Current.MainWindow.Content = new HomeView();
             }
         }
         public void HandleAddEmployee(object sender, RoutedEventArgs e)
         {
-            (bool, Employee) tpl = FormValidator.IsValidFormData(fname.Text, lname.Text, email.Text, jobtitle.Text, department.Text, salary.Text, experience.Text, (DateTime)dob.SelectedDate);
-            if (tpl.Item1 && tpl.Item2 != null)
+            currentEmployee = ConvertFormContentToEmployee();
+            if (FormValidator.IsValidFormData(currentEmployee))
             {
-                EmployeeData.Employees.Add(tpl.Item2);
-                AddDepartment(tpl.Item2.Department);
-                AddJobTitle(tpl.Item2.JobTitle);
-                MessageBox.Show($"{tpl.Item2.FirstName} has been added successfully");
+                EmployeeData.Employees.Add(currentEmployee);
+                AddDepartment(currentEmployee.Department);
+                AddJobTitle(currentEmployee.JobTitle);
+                JsonHelper.WriteToJson<Employee>();
+                JsonHelper.WriteToJson<GeneralFilter>();
+                MessageBox.Show($"{currentEmployee.FirstName} has been added successfully");
             }
         }
         private void AddJobTitle(string jobTitle)
         {
             if (!string.IsNullOrEmpty(jobTitle))
             {
-                GeneralFilter job = EmployeeData.JobTitles.FirstOrDefault(jt => (jt.Category==GeneralFilterCategories.JobTitle && jt.Name.Equals(jobTitle, StringComparison.OrdinalIgnoreCase)));
+                GeneralFilter job = EmployeeData.JobTitles.FirstOrDefault(jt => (jt.Category == GeneralFilterCategories.JobTitle && jt.Name.Equals(jobTitle, StringComparison.OrdinalIgnoreCase)));
                 if (job != null)
                     job.Count += 1;
                 else
-                    EmployeeData.JobTitles.Add(new GeneralFilter { Name = jobTitle, Count = 1,Category=GeneralFilterCategories.JobTitle });
+                    EmployeeData.JobTitles.Add(new GeneralFilter { Name = jobTitle, Count = 1, Category = GeneralFilterCategories.JobTitle });
             }
         }
         private void AddDepartment(string department)
@@ -81,7 +103,7 @@ namespace EmployeeDirectory_WPF.View
                 if (dept != null)
                     dept.Count += 1;
                 else
-                    EmployeeData.Departments.Add(new GeneralFilter { Name = department, Count = 1,Category=GeneralFilterCategories.Department });
+                    EmployeeData.Departments.Add(new GeneralFilter { Name = department, Count = 1, Category = GeneralFilterCategories.Department });
             }
         }
     }

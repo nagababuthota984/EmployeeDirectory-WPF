@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Markup;
+using System.Windows.Media;
 
 namespace EmployeeDirectory_WPF.Converters
 {
@@ -14,11 +15,11 @@ namespace EmployeeDirectory_WPF.Converters
                 if (decimal.TryParse(value.ToString(), NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var range))
                 {
                     if (range < 20000)
-                        return 1;
+                        return new SolidColorBrush(Colors.Red);
                     else if (range < 40000)
-                        return 2;
+                        return new SolidColorBrush(Colors.Blue);
                     else if (range > 40000)
-                        return 3;
+                        return new SolidColorBrush(Colors.ForestGreen);
                 }
             }
             return null;

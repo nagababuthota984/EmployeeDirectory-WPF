@@ -1,7 +1,23 @@
 [
   {
-    "Name": "Sharepoint Practice Head",
+    "Name": "IT Department",
+    "Count": 8,
+    "Category": 0
+  },
+  {
+    "Name": "HR Department",
+    "Count": 4,
+    "Category": 0
+  },
+  {
+    "Name": "UX Department",
     "Count": 1,
+    "Category": 0
+  }
+,
+  {
+    "Name": "Sharepoint Practice Head",
+    "Count": 2,
     "Category": 1
   },
   {
@@ -36,7 +52,7 @@
   },
   {
     "Name": "Talent Magnet Jr.",
-    "Count": 1,
+    "Count": 3,
     "Category": 1
   },
   {
@@ -48,20 +64,5 @@
     "Name": "Head HR",
     "Count": 1,
     "Category": 1
-  },
-  {
-    "Name": "IT Department",
-    "Count": 7,
-    "Category": 0
-  },
-  {
-    "Name": "HR Department",
-    "Count": 2,
-    "Category": 0
-  },
-  {
-    "Name": "UX Department",
-    "Count": 1,
-    "Category": 0
   }
 ]

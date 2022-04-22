@@ -10,7 +10,6 @@ namespace EmployeeDirectory_WPF.Data
     public class JsonHelper
     {
         public static string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-
         public static void WriteToJson<T>()
         {
             string data;
@@ -21,10 +20,9 @@ namespace EmployeeDirectory_WPF.Data
             }
             else if(typeof(T) == typeof(GeneralFilter))
             {
-                List<GeneralFilter> lst = new List<GeneralFilter>();
-                lst.AddRange(EmployeeData.JobTitles);
-                lst.AddRange(EmployeeData.Departments);
-                data = JsonConvert.SerializeObject(lst,Formatting.Indented);
+                data = JsonConvert.SerializeObject(EmployeeData.Departments,Formatting.Indented);
+                string jobData = JsonConvert.SerializeObject(EmployeeData.JobTitles, Formatting.Indented);
+                data = $"{data.Substring(0, data.Length - 1)},{jobData.Substring(1)}";
                 File.WriteAllText($"{projectDirectory}\\Data\\GeneralFilters.json", data);
             }
         }

@@ -39,7 +39,7 @@
                 <Separator Margin="10" Grid.Row="1" Grid.ColumnSpan="3"/>
             </Grid>
 
-            <StackPanel  Margin="20 30 0 0" DockPanel.Dock="Left" Orientation="Vertical">
+            <StackPanel  Margin="20 30 0 0"  DockPanel.Dock="Left" Orientation="Vertical">
                 <TextBlock Margin="0 0 0 3" FontWeight="{StaticResource DemiBold}" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Departments"/>
                 <ListBox Name="DepartmentsDiv" 
                      BorderBrush="White" 
@@ -62,13 +62,14 @@
                 <Separator Margin="0 5 0 0"/>
 
                 <TextBlock Margin="0 5 0 3" FontWeight="{StaticResource DemiBold}" FontSize="{StaticResource SideNavbarHeadingFontSize}" Text="Job Titles"/>
-                <ListBox Name="JobTitlesDiv" BorderBrush="White"  SelectionMode="Single" SelectionChanged="FiltersClickHandler">
+                <ListBox  ScrollViewer.VerticalScrollBarVisibility="Auto" Name="JobTitlesDiv"   BorderBrush="White"  SelectionMode="Single" SelectionChanged="FiltersClickHandler">
+                    
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <StackPanel Orientation="Vertical"/>
+                            <StackPanel Orientation="Vertical"  />
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate>
+                    <ListBox.ItemTemplate >
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontSize="14" Text="{Binding Path=Name}"></TextBlock>
@@ -106,11 +107,25 @@
                             <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Age" Binding="{Binding Path=Dob, Converter={converters:DobToAgeConverter}, StringFormat={}{0} years old}"/>
                             <DataGridTextColumn CellStyle="{StaticResource GenderCellStyle}" Header="Gender" Binding="{Binding Path=Gender}"></DataGridTextColumn>
-                            <DataGridTextColumn Header="JobTitle" Binding="{Binding Path=JobTitle}"/>
+                            <DataGridTextColumn Header="JobTitle" Binding="{Binding Path=JobTitle}">
+                                <DataGridTextColumn.CellStyle>
+                                    <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle}">
+                                        <Setter Property="Background" Value="{Binding Path=JobTitle, Converter={converters:JobTitleToColorConverter}}"/>
+                                        <Setter Property="Foreground" Value="White"/>
+
+                                    </Style>
+                                </DataGridTextColumn.CellStyle>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Department" Binding="{Binding Path=Department}"/>
                             <DataGridTextColumn Header="Experience" Binding="{Binding Path=ExperienceInYears}"/>
                             <DataGridTextColumn Header="Contact" Binding="{Binding Path=ContactNumber}"/>
-                            <DataGridTextColumn CellStyle="{StaticResource SalaryCellStyle}" Header="Salary" Binding="{Binding Path=Salary}"></DataGridTextColumn>
+                            <DataGridTextColumn  Header="Salary" Binding="{Binding Path=Salary}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock" >
+                                        <Setter Property="Foreground" Value="{Binding Path=Salary, Converter={converters:SalaryRangeConverter}}"/>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
                             <DataGridTemplateColumn Header="Edit">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
