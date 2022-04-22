@@ -107,6 +107,7 @@ namespace EmployeeDirectory_WPF.View
                 job.Count -= 1;
                 GeneralFilter dept = EmployeeData.Departments.FirstOrDefault(j => j.Name.Equals(emp.Department, StringComparison.OrdinalIgnoreCase));
                 dept.Count -= 1;
+                JsonHelper.WriteToJson<GeneralFilter>();
                 JsonHelper.WriteToJson<Employee>();
             }
         }

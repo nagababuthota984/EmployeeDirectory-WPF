@@ -43,7 +43,7 @@ namespace EmployeeDirectory_WPF.View
         }
         public Employee ConvertFormContentToEmployee()
         {
-            if (int.TryParse(experience.Text, out int exp) && decimal.TryParse(salary.Text, out decimal sal) && long.TryParse(contactNumber.Text, out long phone))
+            if (int.TryParse(experience.Text, out int exp) && decimal.TryParse(salary.Text, out decimal sal) && long.TryParse(contactNumber.Text, out long phone) && DateTime.TryParse(dob.SelectedDate.ToString(),out DateTime dateOfBirth))
             {
                 currentEmployee.FirstName = fname.Text;
                 currentEmployee.LastName = lname.Text;
@@ -53,6 +53,7 @@ namespace EmployeeDirectory_WPF.View
                 currentEmployee.ExperienceInYears = exp;
                 currentEmployee.Salary = sal;
                 currentEmployee.ContactNumber = phone;
+                currentEmployee.Dob = dateOfBirth;
                 return currentEmployee;
             }
             return null;
@@ -76,6 +77,7 @@ namespace EmployeeDirectory_WPF.View
             currentEmployee = ConvertFormContentToEmployee();
             if (FormValidator.IsValidFormData(currentEmployee))
             {
+                currentEmployee.PreferredName = $"{currentEmployee.FirstName} {currentEmployee.LastName}";
                 EmployeeData.Employees.Add(currentEmployee);
                 AddDepartment(currentEmployee.Department);
                 AddJobTitle(currentEmployee.JobTitle);

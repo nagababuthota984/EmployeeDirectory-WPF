@@ -104,19 +104,21 @@
                                     </MultiBinding>
                                 </DataGridTextColumn.Binding>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Email" Binding="{Binding Path=Email}"></DataGridTextColumn>
+                            <DataGridTextColumn  Header="Email" Binding="{Binding Path=Email}"></DataGridTextColumn>
                             <DataGridTextColumn Header="Age" Binding="{Binding Path=Dob, Converter={converters:DobToAgeConverter}, StringFormat={}{0} years old}"/>
                             <DataGridTextColumn CellStyle="{StaticResource GenderCellStyle}" Header="Gender" Binding="{Binding Path=Gender}"></DataGridTextColumn>
                             <DataGridTextColumn Header="JobTitle" Binding="{Binding Path=JobTitle}">
-                                <DataGridTextColumn.CellStyle>
-                                    <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle}">
+                                <DataGridTextColumn.ElementStyle >
+                                    <Style  TargetType="TextBlock" >
                                         <Setter Property="Background" Value="{Binding Path=JobTitle, Converter={converters:JobTitleToColorConverter}}"/>
                                         <Setter Property="Foreground" Value="White"/>
-
+                                        <Setter Property="Height" Value="20"/>
                                     </Style>
-                                </DataGridTextColumn.CellStyle>
+                                </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Department" Binding="{Binding Path=Department}"/>
+                            <DataGridTextColumn    Header="Department" Binding="{Binding Path=Department}">
+                            </DataGridTextColumn>
+                            
                             <DataGridTextColumn Header="Experience" Binding="{Binding Path=ExperienceInYears}"/>
                             <DataGridTextColumn Header="Contact" Binding="{Binding Path=ContactNumber}"/>
                             <DataGridTextColumn  Header="Salary" Binding="{Binding Path=Salary}">

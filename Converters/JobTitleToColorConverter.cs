@@ -19,7 +19,7 @@ namespace EmployeeDirectory_WPF.Converters
             KeyValuePair<string,SolidColorBrush> job = colors.FirstOrDefault(clrs => clrs.Key.Contains(value.ToString(), StringComparison.CurrentCultureIgnoreCase));
             if(job.Key==null)
             {
-                colors.Add(value.ToString(),new SolidColorBrush(Color.FromRgb((byte)random.Next(1,255),(byte)random.Next(1,255),(byte)random.Next(1,255))));
+                colors.Add(value.ToString(),new SolidColorBrush(Color.FromRgb((byte)random.Next(1,200),(byte)random.Next(1,200),(byte)random.Next(1,200))));
             }
             return colors[value.ToString()];
         }

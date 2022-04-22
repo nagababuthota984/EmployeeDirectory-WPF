@@ -1,12 +1,12 @@
 [
   {
     "Name": "IT Department",
-    "Count": 8,
+    "Count": 5,
     "Category": 0
   },
   {
     "Name": "HR Department",
-    "Count": 4,
+    "Count": 2,
     "Category": 0
   },
   {
@@ -17,7 +17,7 @@
 ,
   {
     "Name": "Sharepoint Practice Head",
-    "Count": 2,
+    "Count": -1,
     "Category": 1
   },
   {
@@ -52,7 +52,7 @@
   },
   {
     "Name": "Talent Magnet Jr.",
-    "Count": 3,
+    "Count": 1,
     "Category": 1
   },
   {
