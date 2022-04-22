@@ -19,12 +19,7 @@ namespace EmployeeDirectory_WPF.Models
             get { return _count; }
             set { _count = value; OnPropertyChange("Count"); }
         }
-        public GeneralFilterCategories Category
-        {
-            get { return _category; }
-            set { _category = value; OnPropertyChange("Category"); }
-
-        }
+        public GeneralFilterCategories Category { get; set; }
         public event PropertyChangedEventHandler? PropertyChanged;
         private void OnPropertyChange(string property)
         {

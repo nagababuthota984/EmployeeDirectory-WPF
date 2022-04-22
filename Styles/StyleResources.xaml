@@ -51,10 +51,12 @@
         <Setter Property="BorderBrush" Value="White"/>
         <Setter Property="Height" Value="25"/>
     </Style>
-    <Style x:Key="EditBtnStyle" TargetType="Button" BasedOn="{StaticResource EditDeleteBtnStyle}">
+    
+    <Style x:Key="ED.Button.EditStyle" TargetType="Button" BasedOn="{StaticResource EditDeleteBtnStyle}">
         <Setter Property="Background" Value="{StaticResource PrimaryColour}"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>
     </Style>
+    
     <Style x:Key="DeleteBtnStyle" TargetType="Button" BasedOn="{StaticResource EditDeleteBtnStyle}">
         <Setter Property="Background" Value="OrangeRed"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>

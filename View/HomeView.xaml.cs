@@ -46,7 +46,7 @@ namespace EmployeeDirectory_WPF.View
                 EmployeeCards.ItemsSource = GetEmployeesByJobTitle(jobTitle.Name);
             }
         }
-        private IEnumerable GetEmployeesByJobTitle(string filterValue)
+        private List<Employee> GetEmployeesByJobTitle(string filterValue)
         {
             return filteredData = EmployeeData.Employees.Where(emp => emp.JobTitle.Equals(filterValue, StringComparison.OrdinalIgnoreCase)).ToList(); ;
         }

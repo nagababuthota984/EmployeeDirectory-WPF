@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace EmployeeDirectory_WPF.Converters
 {
-    public class JobTitleToColorConverter : MarkupExtension, IValueConverter
+    public class JobTitleToColorConverter :  IValueConverter
     {
         public static Random random = new Random();
         public static Dictionary<string, SolidColorBrush> colors = new Dictionary<string, SolidColorBrush>();
@@ -29,9 +29,6 @@ namespace EmployeeDirectory_WPF.Converters
             throw new NotImplementedException();
         }
 
-        public override object ProvideValue(IServiceProvider serviceProvider)
-        {
-            return this;
-        }
+       
     }
 }
