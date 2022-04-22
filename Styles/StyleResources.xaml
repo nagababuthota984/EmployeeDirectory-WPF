@@ -2,15 +2,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <SolidColorBrush x:Key="PrimaryColour" Color="#01B0FC"></SolidColorBrush>
-    <sys:Double x:Key="GreetUserFontSize">20</sys:Double>
-    <sys:Double x:Key="MainHeadingFontSize">30</sys:Double>
-    <sys:Double x:Key="SideNavbarHeadingFontSize">16</sys:Double>
-    <sys:Double x:Key="UserDPWidth">50</sys:Double>
-    <sys:Double x:Key="UserDPHeight">50</sys:Double>
-    <Thickness x:Key="IconMargin">0 3 6 3</Thickness>
-    <Thickness x:Key="NoMargin">0</Thickness>
-    <FontWeight x:Key="DemiBold">DemiBold</FontWeight>
+    <SolidColorBrush x:Key="ED.Colors.PrimaryColour" Color="#01B0FC"></SolidColorBrush>
+    <sys:Double x:Key="Ed.FontSize.GreetUserFontSize">20</sys:Double>
+    <sys:Double x:Key="Ed.FontSize.MainHeadingFontSize">30</sys:Double>
+    <sys:Double x:Key="Ed.FontSize.SideNavbarHeadingFontSize">16</sys:Double>
+    <sys:Double x:Key="Ed.Images.UserDPWidth">50</sys:Double>
+    <sys:Double x:Key="Ed.Images.UserDPHeight">50</sys:Double>
+    <Thickness x:Key="Ed.Margins.IconMargin">0 3 6 3</Thickness>
+    <Thickness x:Key="Ed.Margins.NoMargin">0</Thickness>
+    <FontWeight x:Key="ED.FontWeight.DemiBold">DemiBold</FontWeight>
 
     <Style TargetType="TextBox">
         <Setter Property="Margin" Value="0 0 10 0"></Setter>
@@ -18,25 +18,25 @@
         <Setter Property="Height" Value="30"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
     </Style>
-    <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
+    <Style x:Key="Ed.DataGrid.CellStyle" TargetType="DataGridCell">
         <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
         <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
         <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
         <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
     </Style>
-    <Style x:Key="ColumnsHeaderStyle" TargetType="DataGridColumnHeader">
+    <Style x:Key="Ed.DataGrid.ColumnsHeaderStyle" TargetType="DataGridColumnHeader">
         <Setter Property="Height" Value="30"/>
-        <Setter Property="Background" Value="{StaticResource PrimaryColour}"/>
+        <Setter Property="Background" Value="{StaticResource ED.Colors.PrimaryColour}"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontWeight" Value="DemiBold"></Setter>
     </Style>
-    <Style x:Key="FormLabelText" TargetType="TextBlock">
+    <Style x:Key="Ed.Labels.FormLabelText" TargetType="TextBlock">
         <Setter Property="Padding" Value="0 0 0 4"></Setter>
         <Setter Property="FontWeight" Value="DemiBold"></Setter>
     </Style>
-    <Style x:Key="GenderCellStyle" TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle}">
+    <Style x:Key="Ed.DataGrid.GenderCellStyle" TargetType="DataGridCell" BasedOn="{StaticResource Ed.DataGrid.CellStyle}">
         <Style.Triggers>
             <DataTrigger Binding="{Binding Path=Gender}" Value="Male">
                 <Setter Property="Foreground" Value="DarkOrange"></Setter>
@@ -46,18 +46,18 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
-    <Style x:Key="EditDeleteBtnStyle" TargetType="Button">
+    <Style x:Key="Ed.Buttons.EditDeleteBtnStyle" TargetType="Button">
         <Setter Property="FontWeight" Value="DemiBold"></Setter>
         <Setter Property="BorderBrush" Value="White"/>
         <Setter Property="Height" Value="25"/>
     </Style>
     
-    <Style x:Key="ED.Button.EditStyle" TargetType="Button" BasedOn="{StaticResource EditDeleteBtnStyle}">
-        <Setter Property="Background" Value="{StaticResource PrimaryColour}"></Setter>
+    <Style x:Key="Ed.Buttons.EditStyle" TargetType="Button" BasedOn="{StaticResource Ed.Buttons.EditDeleteBtnStyle}">
+        <Setter Property="Background" Value="{StaticResource ED.Colors.PrimaryColour}"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>
     </Style>
     
-    <Style x:Key="DeleteBtnStyle" TargetType="Button" BasedOn="{StaticResource EditDeleteBtnStyle}">
+    <Style x:Key="Ed.Buttons.DeleteStyle" TargetType="Button" BasedOn="{StaticResource Ed.Buttons.EditDeleteBtnStyle}">
         <Setter Property="Background" Value="OrangeRed"></Setter>
         <Setter Property="Foreground" Value="White"></Setter>
     </Style>
