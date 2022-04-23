@@ -19,7 +19,7 @@ namespace EmployeeDirectory_WPF.View
         public EmployeeDetailsView()
         {
             InitializeComponent();
-            currentEmployee = new Employee();
+            currentEmployee = null;
         }
         private void OnCancel(object sender, RoutedEventArgs e)
         {
@@ -41,43 +41,32 @@ namespace EmployeeDirectory_WPF.View
                 currentEmployee = emp;
             }
         }
-        public Employee ConvertFormContentToEmployee()
+        public void ConvertFormContentToEmployee()
         {
             if (int.TryParse(experience.Text, out int exp) && decimal.TryParse(salary.Text, out decimal sal) && long.TryParse(contactNumber.Text, out long phone) && DateTime.TryParse(dob.SelectedDate.ToString(),out DateTime dateOfBirth))
-            {
-                currentEmployee.FirstName = fname.Text;
-                currentEmployee.LastName = lname.Text;
-                currentEmployee.Email = email.Text;
-                currentEmployee.JobTitle = jobtitle.Text;
-                currentEmployee.Department = department.Text;
-                currentEmployee.ExperienceInYears = exp;
-                currentEmployee.Salary = sal;
-                currentEmployee.ContactNumber = phone;
-                currentEmployee.Dob = dateOfBirth;
-                return currentEmployee;
-            }
-            return null;
-
+                currentEmployee = new Employee(fname.Text, lname.Text, email.Text, dateOfBirth, jobtitle.Text,department.Text, exp, phone, sal, EmployementType.Permanent);
         }
         public void UpdateEmployeeDetails(object sender, RoutedEventArgs e)
         {
-            currentEmployee = ConvertFormContentToEmployee();
-            if (FormValidator.IsValidFormData(currentEmployee))
+            ConvertFormContentToEmployee();
+            if (currentEmployee!=null && FormValidator.IsValidFormData(currentEmployee))
             {
-                EmployeeData.Employees.Remove(EmployeeData.Employees.FirstOrDefault(emp => emp.Email.Equals(currentEmployee.Email, StringComparison.OrdinalIgnoreCase)));
-                EmployeeData.Employees.Add(currentEmployee);
-                JsonHelper.WriteToJson<Employee>();
-                JsonHelper.WriteToJson<GeneralFilter>();
-                MessageBox.Show("Updated Successfully");
-                Application.Current.MainWindow.Content = new HomeView();
+                int index = EmployeeData.Employees.FindIndex(emp => emp.Email.Equals(currentEmployee.Email, StringComparison.OrdinalIgnoreCase));
+                if (index > -1)
+                {
+                    EmployeeData.Employees[index] = currentEmployee;
+                    JsonHelper.WriteToJson<Employee>();
+                    JsonHelper.WriteToJson<GeneralFilter>();
+                    MessageBox.Show("Updated Successfully");
+                    Application.Current.MainWindow.Content = new HomeView();
+                }
             }
         }
         public void HandleAddEmployee(object sender, RoutedEventArgs e)
         {
-            currentEmployee = ConvertFormContentToEmployee();
+            ConvertFormContentToEmployee();
             if (FormValidator.IsValidFormData(currentEmployee))
             {
-                currentEmployee.PreferredName = $"{currentEmployee.FirstName} {currentEmployee.LastName}";
                 EmployeeData.Employees.Add(currentEmployee);
                 AddDepartment(currentEmployee.Department);
                 AddJobTitle(currentEmployee.JobTitle);
@@ -88,7 +77,7 @@ namespace EmployeeDirectory_WPF.View
         }
         private void AddJobTitle(string jobTitle)
         {
-            if (!string.IsNullOrEmpty(jobTitle))
+            if (!string.IsNullOrWhiteSpace(jobTitle))
             {
                 GeneralFilter job = EmployeeData.JobTitles.FirstOrDefault(jt => (jt.Category == GeneralFilterCategories.JobTitle && jt.Name.Equals(jobTitle, StringComparison.OrdinalIgnoreCase)));
                 if (job != null)
@@ -99,7 +88,7 @@ namespace EmployeeDirectory_WPF.View
         }
         private void AddDepartment(string department)
         {
-            if (!string.IsNullOrEmpty(department))
+            if (!string.IsNullOrWhiteSpace(department))
             {
                 GeneralFilter dept = EmployeeData.Departments.FirstOrDefault(jt => jt.Name.Equals(department, StringComparison.OrdinalIgnoreCase));
                 if (dept != null)

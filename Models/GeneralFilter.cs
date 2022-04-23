@@ -3,7 +3,7 @@ using System.ComponentModel;
 using static EmployeeDirectory_WPF.Models.Enums;
 namespace EmployeeDirectory_WPF.Models
 {
-    public class GeneralFilter :INotifyPropertyChanged
+    public class GeneralFilter : INotifyPropertyChanged
     {
         private string _name;
         private int _count;
@@ -13,8 +13,7 @@ namespace EmployeeDirectory_WPF.Models
             get { return _name; }
             set { _name = value; OnPropertyChange("Name"); }
         }
-        
-        public int Count 
+        public int Count
         {
             get { return _count; }
             set { _count = value; OnPropertyChange("Count"); }

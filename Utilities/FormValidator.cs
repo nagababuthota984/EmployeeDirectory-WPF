@@ -16,27 +16,12 @@ namespace EmployeeDirectory_WPF.Utilities
             {
                 if (IsValidEmailFormat(emp.Email) || EmployeeData.Employees.Any(emp => emp.Email.Equals(emp.Email, StringComparison.OrdinalIgnoreCase)))
                 {
-
                     if (DateTime.Today.Year - emp.Dob.Year > 20)
-                    {
-                        Employee employee = new Employee();
-                        employee.FirstName = emp.FirstName;
-                        employee.LastName = emp.LastName;
-                        employee.PreferredName = $"{emp.FirstName} {emp.LastName}";
-                        employee.Email = emp.Email;
-                        employee.JobTitle = emp.JobTitle;
-                        employee.Department = emp.Department;
-                        employee.ExperienceInYears = emp.ExperienceInYears;
-                        employee.Salary = emp.Salary;
-                        employee.ContactNumber = emp.ContactNumber;
-                        employee.Dob = emp.Dob;
                         return true;
-                    }
                     else
                         MessageBox.Show("Invalid Dob");
                 }
                 MessageBox.Show("invalid Mail");
-
             }
             return false;
         }
@@ -44,18 +29,11 @@ namespace EmployeeDirectory_WPF.Utilities
         {
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             Match match = regex.Match(email);
-            if (match.Success)
-                return true;
-            else
-                return false;
+            return match.Success;
         }
         public static bool IsValidString(string text)
         {
-            if (string.IsNullOrEmpty(text) || text.Any(char.IsDigit))
-            {
-                return false;
-            }
-            return true;
+            return !(string.IsNullOrEmpty(text) || text.Any(char.IsDigit));
         }
 
     }
