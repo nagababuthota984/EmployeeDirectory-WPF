@@ -42,7 +42,7 @@
             </Grid>
 
             <StackPanel  Margin="20 30 0 0"  DockPanel.Dock="Left" Orientation="Vertical">
-                <TextBlock Margin="0 0 0 3" FontWeight="{StaticResource ED.FontWeight.DemiBold}" FontSize="{StaticResource Ed.FontSize.SideNavbarHeadingFontSize}" Text="Departments"/>
+                <TextBlock Margin="0 0 0 3" FontWeight="{StaticResource Ed.FontWeight.DemiBold}" FontSize="{StaticResource Ed.FontSize.SideNavbarHeadingFontSize}" Text="Departments"/>
                 <ListBox Name="DepartmentsDiv" 
                      BorderBrush="White" 
                      SelectionMode="Single" 
@@ -63,7 +63,7 @@
                 </ListBox>
                 <Separator Margin="0 5 0 0"/>
 
-                <TextBlock Margin="0 5 0 3" FontWeight="{StaticResource ED.FontWeight.DemiBold}" FontSize="{StaticResource Ed.FontSize.SideNavbarHeadingFontSize}" Text="Job Titles"/>
+                <TextBlock Margin="0 5 0 3" FontWeight="{StaticResource Ed.FontWeight.DemiBold}" FontSize="{StaticResource Ed.FontSize.SideNavbarHeadingFontSize}" Text="Job Titles"/>
                 <ListBox  ScrollViewer.VerticalScrollBarVisibility="Auto" Name="JobTitlesDiv"   BorderBrush="White"  SelectionMode="Single" SelectionChanged="FiltersClickHandler">
                     
                     <ListBox.ItemsPanel>
@@ -99,14 +99,23 @@
                     <DataGrid Margin="0 0 0 20"  CellStyle="{ StaticResource Ed.DataGrid.CellStyle}" ColumnHeaderStyle="{StaticResource Ed.DataGrid.ColumnsHeaderStyle}" IsReadOnly="True"  Name="EmployeeCards" ColumnWidth="*" AutoGenerateColumns="False" RowHeight="35" GridLinesVisibility="None" HeadersVisibility="Column" >
                         
                         <DataGrid.Columns  >
-                            <DataGridTextColumn Header="Name">
-                                <DataGridTextColumn.Binding>
+                            <DataGridTemplateColumn Header="Name">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <Run Text="{Binding FirstName}"/>
+                                            <Run Text="{Binding LastName}"/>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                
+                                <!--<DataGridTextColumn.Binding>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="FirstName"/>
                                         <Binding Path="LastName"/>
                                     </MultiBinding>
-                                </DataGridTextColumn.Binding>
-                            </DataGridTextColumn>
+                                </DataGridTextColumn.Binding>-->
+                            </DataGridTemplateColumn>
                             <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
                             <DataGridTextColumn Header="Age" Binding="{Binding Dob, Converter={converters:DobToAgeConverter}, StringFormat={}{0} years old}"/>
                             <DataGridTextColumn CellStyle="{StaticResource Ed.DataGrid.GenderCellStyle}" Header="Gender" Binding="{Binding Gender}"></DataGridTextColumn>
@@ -152,11 +161,11 @@
                     </DataGrid>
                 </Grid>
                 <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
-                    <Label HorizontalAlignment="Left" FontSize="14" FontWeight="{StaticResource ED.FontWeight.DemiBold}" Height="30" Content="Search:"/>
+                    <Label HorizontalAlignment="Left" FontSize="14" FontWeight="{StaticResource Ed.FontWeight.DemiBold}" Height="30" Content="Search:"/>
                     <TextBox Name="Search" Focusable="True" KeyUp="HandleSearchKeyUp"  Padding="5" Height="30" Width="150" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
-                    <Label FontSize="14" FontWeight="{StaticResource ED.FontWeight.DemiBold}"  Height="30" Content="Filter By:"/>
+                    <Label FontSize="14" FontWeight="{StaticResource Ed.FontWeight.DemiBold}"  Height="30" Content="Filter By:"/>
                     <ComboBox  Name="Filter" Padding="7" Height="30" Width="160" SelectionChanged="FilterSelectionChanged" />
                 </StackPanel>
             </Grid>

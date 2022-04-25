@@ -20,7 +20,7 @@
             <RowDefinition Height="68"></RowDefinition>
             <RowDefinition Height="68"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock Style="{StaticResource Ed.Labels.FormLabelText}" Name="Heading" Margin="0 10 0 20" Foreground="{StaticResource ED.Colors.PrimaryColour}"  Grid.ColumnSpan="3" FontSize="{StaticResource Ed.FontSize.MainHeadingFontSize}" FontWeight="{StaticResource ED.FontWeight.DemiBold}" HorizontalAlignment="Left" VerticalAlignment="Center" ></TextBlock>
+        <TextBlock Style="{StaticResource Ed.Labels.FormLabelText}" Name="Heading" Margin="0 10 0 20" Foreground="{StaticResource ED.Colors.PrimaryColour}"  Grid.ColumnSpan="3" FontSize="{StaticResource Ed.FontSize.MainHeadingFontSize}" FontWeight="{StaticResource Ed.FontWeight.DemiBold}" HorizontalAlignment="Left" VerticalAlignment="Center" ></TextBlock>
         <Separator Margin="0 0 0 10" Grid.ColumnSpan="3" VerticalAlignment="Bottom" />
         <TextBlock Style="{StaticResource Ed.Labels.FormLabelText}" VerticalAlignment="Top" Grid.Row="1" Text="First Name" />
         <TextBox Name="fname" Grid.Row="1"></TextBox>
@@ -41,8 +41,8 @@
         <TextBlock Style="{StaticResource Ed.Labels.FormLabelText }" VerticalAlignment="Top" Grid.Row="3" Grid.Column="2" Text="Contact Number" ></TextBlock>
         <TextBox Name="contactNumber"  Grid.Row="3" Grid.Column="2"></TextBox>
 
-        <Button Name="SubmitBtn"  Background="{StaticResource ED.Colors.PrimaryColour }" Foreground="White" FontWeight="{StaticResource ED.FontWeight.DemiBold }" Grid.Row="5" Grid.Column="1" Height="30" Width="190" Margin="0 0 10 0" ></Button>
-        <Button Name="CancelBtn"  Content="Cancel" Background="OrangeRed" Foreground="White" Grid.Row="5" Grid.Column="2" FontWeight="{StaticResource ED.FontWeight.DemiBold }" Height="30" Width="190" Margin="0 0 10 0" Click="OnCancel" ></Button>
+        <Button Name="SubmitBtn"  Background="{StaticResource ED.Colors.PrimaryColour }" Foreground="White" FontWeight="{StaticResource Ed.FontWeight.DemiBold }" Grid.Row="5" Grid.Column="1" Height="30" Width="190" Margin="0 0 10 0" ></Button>
+        <Button Name="CancelBtn"  Content="Cancel" Background="OrangeRed" Foreground="White" Grid.Row="5" Grid.Column="2" FontWeight="{StaticResource Ed.FontWeight.DemiBold }" Height="30" Width="190" Margin="0 0 10 0" Click="OnCancel" ></Button>
 
     </Grid>
 </UserControl>

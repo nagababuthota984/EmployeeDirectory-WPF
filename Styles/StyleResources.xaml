@@ -10,7 +10,7 @@
     <sys:Double x:Key="Ed.Images.UserDPHeight">50</sys:Double>
     <Thickness x:Key="Ed.Margins.IconMargin">0 3 6 3</Thickness>
     <Thickness x:Key="Ed.Margins.NoMargin">0</Thickness>
-    <FontWeight x:Key="ED.FontWeight.DemiBold">DemiBold</FontWeight>
+    <FontWeight x:Key="Ed.FontWeight.DemiBold">DemiBold</FontWeight>
 
     <Style TargetType="TextBox">
         <Setter Property="Margin" Value="0 0 10 0"></Setter>

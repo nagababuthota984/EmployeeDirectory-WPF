@@ -35,7 +35,7 @@ namespace EmployeeDirectory_WPF.View
         public void FiltersClickHandler(object sender, SelectionChangedEventArgs e)
         {
             var lbox = sender as ListBox;
-            if (lbox.Name.Equals("DepartmentsDiv",StringComparison.OrdinalIgnoreCase))
+            if (lbox.Name.Equals("DepartmentsDiv", StringComparison.OrdinalIgnoreCase))
             {
                 var dept = (GeneralFilter)lbox.SelectedItem;
                 EmployeeCards.ItemsSource = GetEmployeesByDept(dept.Name);
@@ -103,7 +103,7 @@ namespace EmployeeDirectory_WPF.View
                 //delete the employee here
                 Employee emp = EmployeeData.Employees.FirstOrDefault(emp => emp.Email.Equals(SelectedEmployee.Email, StringComparison.OrdinalIgnoreCase));
                 emp.Status = Status.Resigned;
-                GeneralFilter job =EmployeeData.JobTitles.FirstOrDefault(j => j.Name.Equals(emp.JobTitle, StringComparison.OrdinalIgnoreCase));
+                GeneralFilter job = EmployeeData.JobTitles.FirstOrDefault(j => j.Name.Equals(emp.JobTitle, StringComparison.OrdinalIgnoreCase));
                 job.Count -= 1;
                 GeneralFilter dept = EmployeeData.Departments.FirstOrDefault(j => j.Name.Equals(emp.Department, StringComparison.OrdinalIgnoreCase));
                 dept.Count -= 1;
