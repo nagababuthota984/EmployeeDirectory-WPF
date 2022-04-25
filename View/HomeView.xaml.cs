@@ -70,7 +70,7 @@ namespace EmployeeDirectory_WPF.View
         private void OpenAddEmployeeForm(object sender, RoutedEventArgs e)
         {
             Main.Visibility = Visibility.Collapsed;
-            EmpDetailsView.Heading.Text = "New Employee Details";
+            EmpDetailsView.Heading.Text = "New Employee";
             EmpDetailsView.SubmitBtn.Content = "Add Employee";
             EmpDetailsView.email.IsEnabled = true;
             EmpDetailsView.SubmitBtn.Click += EmpDetailsView.HandleAddEmployee;  //disposal?
@@ -82,7 +82,7 @@ namespace EmployeeDirectory_WPF.View
             Main.Visibility = Visibility.Collapsed;
             SelectedEmployee = (Employee)EmployeeCards.SelectedItem;
             EmpDetailsView.LoadContentIntoForm(SelectedEmployee);
-            EmpDetailsView.Heading.Text = "Edit Employee Details";
+            EmpDetailsView.Heading.Text = "Edit Employee";
             EmpDetailsView.SubmitBtn.Content = "Update Details";
             EmpDetailsView.SubmitBtn.Click += EmpDetailsView.UpdateEmployeeDetails;
             UserControlSpace.Visibility = Visibility.Visible;
